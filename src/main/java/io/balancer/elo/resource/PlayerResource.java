@@ -1,0 +1,76 @@
+package io.balancer.elo.resource;
+
+import io.balancer.elo.model.Player;
+import io.balancer.elo.model.Response;
+import io.balancer.elo.model.Team;
+import io.balancer.elo.model.Teams;
+import io.balancer.elo.service.PlayerServiceImplementation;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+
+import static java.time.LocalDateTime.now;
+import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.OK;
+
+//Controller
+
+@CrossOrigin(origins = "http://localhost:3000")
+@RestController
+@RequestMapping("/api/player")
+public class PlayerResource {
+    private final PlayerServiceImplementation playerServiceImplementation;
+
+    public PlayerResource(PlayerServiceImplementation playerServiceImplementation) {
+        this.playerServiceImplementation = playerServiceImplementation;
+    }
+
+    @GetMapping("/get/{id}")
+    public ResponseEntity<Response> getPlayer(@PathVariable("id") Long id){
+        return ResponseEntity.ok(Response.builder()
+                .timeStamp(now())
+                .data(Map.of("player", playerServiceImplementation.get(id)))
+                .message("Player retrieved")
+                .status(OK)
+                .statusCode(OK.value())
+                .build());
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<Response> getList(){
+        return ResponseEntity.ok(Response.builder()
+                .timeStamp(now())
+                .data(Map.of("players", playerServiceImplementation.list(10)))
+                .message("Players retrieved")
+                .status(OK)
+                .statusCode(OK.value())
+                .build());
+    }
+
+    @GetMapping("/list_test")
+    public List<Player> getListTest(){
+        return playerServiceImplementation.listTest();
+    }
+
+
+    @GetMapping("/balanceTeams")
+    public List<Team> getBalancedTeams(){
+        return playerServiceImplementation.printOutTeams();
+    }
+
+    @PostMapping("/add") //Post request, adds new players into the system
+    public ResponseEntity<Response> addPlayer(@RequestBody @Valid Player player){
+        return ResponseEntity.ok(Response.builder()
+                .timeStamp(now())
+                .data(Map.of("Adding", playerServiceImplementation.create(player)))
+                .message("Player added")
+                .status(CREATED)
+                .statusCode(CREATED.value())
+                .build());
+    }
+}

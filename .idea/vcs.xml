@@ -2,7 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/elo-balancer" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/src/main/elo-frontend" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/elo-balancer" vcs="" />
+    <mapping directory="$PROJECT_DIR$/src/main/elo-frontend" vcs="" />
   </component>
 </project>

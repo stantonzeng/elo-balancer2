@@ -20,11 +20,18 @@ public class Teams {
         });
     }
 
+    public void addEntireListToQueue(Teams t){
+        Iterator it = t.getTeams().iterator();
+
+        while(it.hasNext()){
+            addToList((Team) it.next());
+        }
+    }
+
     public void addToList(Team t){
         this.teams.add((t));
     }
 
-    //https://howtodoinjava.com/java/collections/java-priorityqueue/
     private PriorityQueue<Team> teams;
 
     public PriorityQueue<Team> getTeams(){

@@ -71,15 +71,15 @@ public class PlayerServiceImplementation implements PlayerService{
     just call the Teams Priority queue and pop out the first 10 values.
      */
     @Override
-    public Teams balanceTeams(){
+    public Teams balanceTeams(int num){
         log.info("Starting Balancing Teams");
 
-        //p will hold all of the players (Up to size 10) taken by listTest()
+        //p will hold all the players (Up to size 10) taken by listTest()
         List<Player> p = listTest();
         p.sort(compareByElo);
 
-        List<Player> t1 = new ArrayList<Player>();
-        List<Player> t2 = new ArrayList<Player>();
+        List<Player> t1 = new ArrayList<>();
+        List<Player> t2 = new ArrayList<>();
         List<Player> swappedT1;
         List<Player> swappedT2;
 
@@ -93,7 +93,7 @@ public class PlayerServiceImplementation implements PlayerService{
         //Fix this for loop, it is very messy and will produce a lot of errors
 
         for(int i = 0; i < p.size(); i++){
-            if(i%2 == 0){
+            if(i%2 == num){
                 t1.add(p.get(i));
                 sumT1 += p.get(i).getElo();
             }
@@ -160,14 +160,10 @@ public class PlayerServiceImplementation implements PlayerService{
     @Override
     public List<Team> printOutTeams(){
         log.info("Starting to make Teams");
-        List<Team> res = new ArrayList<Team>();
-        Teams listTeams = this.balanceTeams();
+        Teams listTeams = this.balanceTeams(0);
+        listTeams.addEntireListToQueue(balanceTeams(1));
 
-        Iterator it = listTeams.getTeams().iterator();
-
-        while(it.hasNext()){
-            res.add((Team) it.next());
-        }
+        List<Team> res = new ArrayList<Team>(listTeams.getTeams());
 
         log.info("Printing out Teams");
         return res;

@@ -1,13 +1,16 @@
 package io.balancer.elo.model;
 
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.PriorityQueue;
 
+
 @Data
+@Slf4j
 public class Teams {
     public Teams() {
         this.teams = new PriorityQueue<Team>(10, new Comparator<Team>() {
@@ -20,6 +23,8 @@ public class Teams {
         });
     }
 
+
+
     public void addEntireListToQueue(Teams t){
         Iterator it = t.getTeams().iterator();
 
@@ -29,12 +34,19 @@ public class Teams {
     }
 
     public void addToList(Team t){
+//        log.info("Printing added players " + t.printAllPlayers());
         this.teams.add((t));
     }
 
     private PriorityQueue<Team> teams;
 
     public PriorityQueue<Team> getTeams(){
+//        PriorityQueue<Team> temp = new PriorityQueue<>();
+//        temp = this.teams;
+
+//        while(!temp.isEmpty()){
+//            log.info(temp.poll().printAllPlayers() + "\n");
+//        }
         return this.teams;
     }
 }

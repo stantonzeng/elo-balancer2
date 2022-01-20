@@ -106,7 +106,7 @@ public class PlayerServiceImplementation implements PlayerService{
         Team logger = new Team(t1, t2, sumT1, sumT2);
         log.info("Original Set: " + logger.printAllPlayers());
 
-        implementedTeams.addToList(new Team(t1, t2, sumT1, sumT2));
+//        implementedTeams.addToList(new Team(t1, t2, sumT1, sumT2));
 
         //We will use these 2 values to help with swapping players
         Player tempSwap = null;
@@ -192,8 +192,9 @@ public class PlayerServiceImplementation implements PlayerService{
 
                     double tempSumT1 = sumT1;
                     double tempSumT2 = sumT2;
-                    swappedT1 = t1;
-                    swappedT2 = t2;
+
+                    List<Player> swappedT1 = new ArrayList<>(t1);
+                    List<Player> swappedT2 = new ArrayList<>(t2);
 
                     //Here, we use findPosition to minimize whatever value we got from tracker
                     otherPos2 = findPosition(t2, t1.get(k).getElo(), tracker, l);
@@ -219,6 +220,7 @@ public class PlayerServiceImplementation implements PlayerService{
                 }
             }
         }
+
         */
 
         // |------------------------------------------- DOUBLE SWAP END-------------------------------------------|
@@ -250,12 +252,7 @@ public class PlayerServiceImplementation implements PlayerService{
     @Override
     public List<Team> printOutTeams(){
         log.info("Starting to make Teams");
-        Teams listTeams = this.balanceTeams(0);
-//        listTeams.addEntireListToQueue(balanceTeams(1));
-
-        List<Team> res = new ArrayList<Team>(listTeams.getTeams());
-
         log.info("Printing out Teams");
-        return res;
+        return this.balanceTeams(0).getTeams();
     }
 }

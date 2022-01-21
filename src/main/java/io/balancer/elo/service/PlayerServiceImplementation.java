@@ -106,50 +106,42 @@ public class PlayerServiceImplementation implements PlayerService{
         Team logger = new Team(t1, t2, sumT1, sumT2);
         log.info("Original Set: " + logger.printAllPlayers());
 
-//        implementedTeams.addToList(new Team(t1, t2, sumT1, sumT2));
+        implementedTeams.addToList(new Team(t1, t2, sumT1, sumT2));
 
         //We will use these 2 values to help with swapping players
         Player tempSwap = null;
         int pos2 = 0;
 
         Player tempSwap2 = null;
-        int otherPos2 = 0;
 
         // |------------------------------------------- SINGLE SWAP START -------------------------------------------|
         for(int i = 0; i < t1.size(); i++){
 
-            double tempSumT1 = sumT1;
-            double tempSumT2 = sumT2;
-
-            List<Player> swappedT1 = new ArrayList<>(t1);
-            List<Player> swappedT2 = new ArrayList<>(t2);
-
             /*
-            For the single swap, we want to find the two CLOSEST elo values from t1 and t2
-            The intuition behind this is that when only swapping one player from each team,
-            we naturally want to minimize the elo difference in the teams. Thus,
+            For the single swap, we want to find the two values that will minimize the elo differential between the two
+            teams. t1 and t2 ARE NOT OPTIMAL, thus we must check and find the most optimal one.
             */
-            pos2 = findPosition(t2, t1.get(i).getElo(), Integer.MAX_VALUE, -1);
+            pos2 = findPosition(t2, sumT1, sumT2, t1.get(i).getElo(), -1);
             tempSwap = t2.get(pos2);
 
             //Once we get the lowest elo differential possible we do a swap of the best possible result
             //tempSumT1 and tempSumT2 holds the elo's for the newly swapped teams.
-            tempSumT1 = tempSumT1 - swappedT1.get(i).getElo() + tempSwap.getElo();
-            tempSumT2 = tempSumT2 + swappedT1.get(i).getElo() - tempSwap.getElo();
+            double tempSumT1 = sumT1 - t1.get(i).getElo() + tempSwap.getElo();
+            double tempSumT2 = sumT2 + t1.get(i).getElo() - tempSwap.getElo();
+            List<Player> swappedT1 = new ArrayList<>(t1);
+            List<Player> swappedT2 = new ArrayList<>(t2);
+
             swappedT2.set(pos2, swappedT1.get(i));
             swappedT1.set(i, tempSwap);
 
-            Team tempT = new Team(swappedT1, swappedT2, tempSumT1, tempSumT2);
-
-
             log.info("Switching values at index " + i + " with " + pos2);
-            log.info("New Set: " + tempT.printAllPlayers());
+//            log.info("New Set: " + tempT.printAllPlayers());
 
             //The swap should work... test to make sure
 
             //Assign these two values to a team and min heap the team using elo diff
             //Pushing the tempTeam with its elo difference of the teams into the priority queue of Teams
-            implementedTeams.addToList(tempT);
+            implementedTeams.addToList(new Team(swappedT1, swappedT2, tempSumT1, tempSumT2));
         }
 
         // |------------------------------------------- SINGLE SWAP END -------------------------------------------|
@@ -172,56 +164,43 @@ public class PlayerServiceImplementation implements PlayerService{
         can minimize the elo differences. This will help create more legit and dynamic teams.
 
         This is def O(n^4), but since our size is so small (like 12 players being checked at most), then we really don't care about run time.
-
-        The original iteration is above commented out above for O(n^3).
         */
-
-
-        /*
         for(int i = 0; i < t1.size(); i++){
-
             for(int l = 0; l < t2.size(); l++){
-
-                //Tracker now represents the elo difference from the randomly checked values of t1[i] and t2[l]
-                double tracker = abs(t1.get(i).getElo()-t2.get(l).getElo());
                 tempSwap = t2.get(l);
                 for(int k = 0; k < t1.size(); k++){
-
                     if(k == i)
                         continue;
 
-                    double tempSumT1 = sumT1;
-                    double tempSumT2 = sumT2;
+                    /*
+                    Here, similar to the single swap method, we can input the sum elo of both team 1 and team 2, but this time since
+                    we know that we are testing it if we use pointer i and l, then we can use the same function, "findPosition", but send
+                    in the elo's
 
+                     */
+                    int newPosition2 = findPosition(t2, sumT1-t1.get(i).getElo(), sumT2-t2.get(l).getElo(), t1.get(k).getElo(), l);
+                    tempSwap2 = t2.get(newPosition2);
+
+                    double tempSumT1 = sumT1 - t1.get(i).getElo() - t1.get(k).getElo() + tempSwap.getElo() + tempSwap2.getElo();
+                    double tempSumT2 = sumT2 + t1.get(i).getElo() + t1.get(k).getElo() - tempSwap.getElo() - tempSwap2.getElo();
                     List<Player> swappedT1 = new ArrayList<>(t1);
                     List<Player> swappedT2 = new ArrayList<>(t2);
 
-                    //Here, we use findPosition to minimize whatever value we got from tracker
-                    otherPos2 = findPosition(t2, t1.get(k).getElo(), tracker, l);
-                    tracker = abs(t1.get(k).getElo()-t2.get(otherPos2).getElo()); //Fix this, the tracker method does not work for the double swap
-                    //We cannot just look for closest 0 value, we have to take into account
-                    tempSwap2 = t2.get(otherPos2);
-
-                    tempSumT1 = tempSumT1 - swappedT1.get(i).getElo() - swappedT1.get(k).getElo() + tempSwap.getElo() + tempSwap2.getElo();
-                    tempSumT2 = tempSumT2 + swappedT1.get(i).getElo() + swappedT1.get(k).getElo() - tempSwap.getElo() - tempSwap2.getElo();
                     swappedT2.set(l, swappedT1.get(i));
-                    swappedT2.set(otherPos2, swappedT1.get(k));
+                    swappedT2.set(newPosition2, swappedT1.get(k));
                     swappedT1.set(i, tempSwap);
                     swappedT1.set(k, tempSwap2);
 
                     //The swap should work... test to make sure
 
                     //Assign these two values to a team and min heap the team using elo diff
-                    Team tempTeam = new Team(swappedT1, swappedT2, tempSumT1, tempSumT2);
-                    tempTeam.setEloDifference(tracker);
-
                     //Pushing the tempTeam with its elo difference of the teams into the priority queue of Teams
-                    implementedTeams.addToList(tempTeam);
+                    implementedTeams.addToList(new Team(swappedT1, swappedT2, tempSumT1, tempSumT2));
                 }
             }
         }
 
-        */
+
 
         // |------------------------------------------- DOUBLE SWAP END-------------------------------------------|
         log.info("Returning Balanced Teams");
@@ -229,23 +208,29 @@ public class PlayerServiceImplementation implements PlayerService{
         return implementedTeams;
     }
 
-    //FIX THIS!!! We still are not getting the smallest elo differential. Do the math tomorrow
-    public int findPosition(List<Player> t2, double elo, double tracker, int check){
+    /*
+    Logic behind the findPosition function:
+
+    So when we want to minimize the elo differential, we can just instead take the original sum of the both the team's elo's
+    and just compare what it would be like if we switched two of the indexes. Thus, the strange math for val is just a
+    simple representation of "switching". We take and record whichever index of t2 gives us the lowest value and return
+    back the index.
+     */
+
+    public int findPosition(List<Player> t2, double eloSumT1, double eloSumT2, double index1Elo, int check){
         int res = -1;
+        double leastVal = Integer.MAX_VALUE;
         for(int j = 0; j < t2.size(); j++){
             if(j == check)
                 continue;
 
-            double otherE2 = t2.get(j).getElo();
+            double val = abs((eloSumT1 - index1Elo + t2.get(j).getElo()) - (eloSumT2 + index1Elo - t2.get(j).getElo()));
 
-            //if the difference of the two new points are less than the old tracker,
-            //then we've found a more balanced set of two points
-            if(abs(elo-otherE2) < tracker){
+            if(val < leastVal){
                 res = j;
-                tracker = abs(elo-otherE2);
+                leastVal = val;
             }
         }
-
         return res;
     }
 

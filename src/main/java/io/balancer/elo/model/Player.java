@@ -23,4 +23,7 @@ public class Player {
     @Column(unique = true) //All name values have to be unique, maps the value name to a database column
     private String name;
 
+    private int streak;
+    private int numGamesPlayed;
+
 }

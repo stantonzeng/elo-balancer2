@@ -2,6 +2,7 @@ package io.balancer.elo.model;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -22,7 +23,7 @@ public class Teams {
 
 
 
-    public void addEntireListToQueue(Teams t){
+    public void addEntireListToQueue(@NotNull Teams t){
         Iterator it = t.getTeams().iterator();
 
         while(it.hasNext()){
@@ -48,5 +49,9 @@ public class Teams {
             cnt--;
         }
         return this.sortedTeams;
+    }
+
+    public void adjustElo(int index, int win){
+        this.sortedTeams.get(index).adjustRatings(win);
     }
 }

@@ -72,6 +72,17 @@ public class PlayerResource {
         return playerServiceImplementation.printOutTeams(amount);
     }
 
+    @PostMapping("/win/{index}/{team}")
+    public ResponseEntity<Response> updateWin(@PathVariable("index") int index, @PathVariable("team") int team){
+        return ResponseEntity.ok(Response.builder()
+                .timeStamp(now())
+                .data(Map.of("Results of game: ", playerServiceImplementation.gameResults(index, team)))
+                .message("Team's elos adjusted")
+                .status(CREATED)
+                .statusCode(CREATED.value())
+                .build());
+    }
+
     @PostMapping("/add") //Post request, adds new players into the system
     public ResponseEntity<Response> addPlayer(@RequestBody @Valid Player player){
         return ResponseEntity.ok(Response.builder()

@@ -4,8 +4,6 @@ import io.balancer.elo.model.Player;
 import io.balancer.elo.model.Team;
 import io.balancer.elo.model.Teams;
 
-import java.util.Collection;
-import java.util.Comparator;
 import java.util.List;
 
 public interface PlayerService {
@@ -37,4 +35,6 @@ public interface PlayerService {
      */
 
     List<Team> printOutTeams(int amount);
+
+    String gameResults(int index, int win);
 }

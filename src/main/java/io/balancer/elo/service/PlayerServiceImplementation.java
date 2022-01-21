@@ -20,6 +20,8 @@ import static java.lang.Math.*;
 public class PlayerServiceImplementation implements PlayerService{
     private final PlayerRepository _playerRepo; //final means can only be assigned once
 
+    private Teams _teams;
+
     public PlayerServiceImplementation(PlayerRepository playerRepo) {
         _playerRepo = playerRepo;
     }
@@ -213,7 +215,7 @@ public class PlayerServiceImplementation implements PlayerService{
 
         // |------------------------------------------- DOUBLE SWAP END-------------------------------------------|
         log.info("Returning Balanced Teams");
-
+        this._teams = implementedTeams;
         return implementedTeams;
     }
 
@@ -223,10 +225,10 @@ public class PlayerServiceImplementation implements PlayerService{
     So when we want to minimize the elo differential, we can just instead take the original sum of the both the team's elo's
     and just compare what it would be like if we switched two of the indexes. Thus, the strange math for val is just a
     simple representation of "switching". We take and record whichever index of t2 gives us the lowest value and return
-    back the index.
-     */
+    the index.
+    */
 
-    public int findPosition(List<Player> t2, double eloSumT1, double eloSumT2, double index1Elo, int check){
+    private int findPosition(List<Player> t2, double eloSumT1, double eloSumT2, double index1Elo, int check){
         int res = -1;
         double leastVal = Integer.MAX_VALUE;
         for(int j = 0; j < t2.size(); j++){
@@ -244,24 +246,29 @@ public class PlayerServiceImplementation implements PlayerService{
     }
 
     /*
-        Some Notes on this function
+    Some Notes on this function
 
-        This function is basically useless, but it helps make everything look pretty?
+    This function is basically useless, but it helps make everything look pretty?
 
-        balanceTeams(int num) returns a Teams object that holds a priority queue of the sorted teams.
-        The "num" part of it is also essentially useless, but it switches which side the teams are on. If num == 0,
-        then team 1 will be team 1, but if num == 1, then the team 1 of num == 0 will switch to team 2. This doesn't do
-        much, but it might provide functionality in the future, so im keeping it.
+    balanceTeams(int num) returns a Teams object that holds a priority queue of the sorted teams.
+    The "num" part of it is also essentially useless, but it switches which side the teams are on. If num == 0,
+    then team 1 will be team 1, but if num == 1, then the team 1 of num == 0 will switch to team 2. This doesn't do
+    much, but it might provide functionality in the future, so im keeping it.
 
-        getTeams(int num) returns the sorted teams in a list format, but at a limit of num. If you want the 10 best teams,
-        then num == 10.
-
-         */
+    getTeams(int num) returns the sorted teams in a list format, but at a limit of num. If you want the 10 best teams,
+    then num == 10.
+     */
 
     @Override
     public List<Team> printOutTeams(int amount){
         log.info("Starting to make Teams");
 
         return this.balanceTeams(0).getTeams(amount);
+    }
+
+    @Override
+    public String gameResults(int index, int win){
+        this._teams.adjustElo(index, win);
+        return "Team " + win+1 + " won";
     }
 }

@@ -78,7 +78,7 @@ public class PlayerServiceImplementation implements PlayerService{
         log.info("Starting Balancing Teams");
 
         //p will hold all the players (Up to size 10) taken by listTest()
-        List<Player> p = list(0, 9);
+        List<Player> p = list(0, 10);
 //        log.info("Sorting");
 //        p.sort(compareByElo);
 //        log.info("Sorting finished");

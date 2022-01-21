@@ -16,16 +16,16 @@ public class EloApplication{
 	@Bean
 	CommandLineRunner run(PlayerRepository playerRepo){
 		return args -> {
-			playerRepo.save(new Player(null, 3.0, "bterabtragdsa"));
-			playerRepo.save(new Player(null, 2.0, "My Cat Says Meow"));
-			playerRepo.save(new Player(null, 16.0, "bubblysoju"));
-			playerRepo.save(new Player(null, 17.0, "pagchompu"));
-			playerRepo.save(new Player(null, 11.0, "Shamusa"));
-			playerRepo.save(new Player(null, 5.0, "asdgartbaretb"));
-			playerRepo.save(new Player(null, 11.0, "ShadowStriker"));
-			playerRepo.save(new Player(null, 4.0, "Mitsuki Moon"));
-			playerRepo.save(new Player(null, 20.0, "Ally of Women"));
-			playerRepo.save(new Player(null, 9.0, "Lionblaze219"));
+			playerRepo.save(new Player(null, 1558.0, "bterabtragdsa"));
+			playerRepo.save(new Player(null, 1160.0, "My Cat Says Meow"));
+			playerRepo.save(new Player(null, 1893.0, "bubblysoju"));
+			playerRepo.save(new Player(null, 1524.0, "pagchompu"));
+			playerRepo.save(new Player(null, 1001.0, "Shamusa"));
+			playerRepo.save(new Player(null, 1636.0, "asdgartbaretb"));
+			playerRepo.save(new Player(null, 1222.0, "ShadowStriker"));
+			playerRepo.save(new Player(null, 1279.0, "Mitsuki Moon"));
+			playerRepo.save(new Player(null, 1554.0, "Ally of Women"));
+			playerRepo.save(new Player(null, 1618.0, "Lionblaze219"));
 		};
 	}
 }

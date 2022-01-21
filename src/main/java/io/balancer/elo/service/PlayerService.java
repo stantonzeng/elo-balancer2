@@ -15,9 +15,9 @@ public interface PlayerService {
 
     Player get(Long id);
 
-    Collection<Player> list(int limit);
+    List<Player> list(int start, int limit);
 
-    List<Player> listTest();
+    List<Player> fullList();
 
     Teams balanceTeams(int num);
 
@@ -36,5 +36,5 @@ public interface PlayerService {
     just call the Teams Priority queue and pop out the first 10 values.
      */
 
-    List<Team> printOutTeams();
+    List<Team> printOutTeams(int amount);
 }

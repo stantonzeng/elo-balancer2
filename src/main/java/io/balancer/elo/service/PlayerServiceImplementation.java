@@ -43,17 +43,20 @@ public class PlayerServiceImplementation implements PlayerService{
     }
 
     @Override
-    public Collection<Player> list(int limit) {
-        log.info("Fetching all players");
-        return _playerRepo.findAll(PageRequest.of(0, limit)).toList();
+    public List<Player> list(int start, int limit) {
+        log.info("Fetching players");
+        return _playerRepo.findAll(PageRequest.of(start, limit)).toList();
     }
 
     @Override
-    public List<Player> listTest(){
+    public List<Player> fullList(){
         log.info("Fetching all players");
         return _playerRepo.findAll();
     }
 
+
+    //This is used for sorting, if I want to sort the list of players again, I can implement this back
+    //Reason for commenting it out: Sorting doesn't work with limits on players for some reason...
     Comparator<Player> compareByElo = Comparator.comparing(Player::getElo);
 
     /*
@@ -75,8 +78,10 @@ public class PlayerServiceImplementation implements PlayerService{
         log.info("Starting Balancing Teams");
 
         //p will hold all the players (Up to size 10) taken by listTest()
-        List<Player> p = listTest();
-        p.sort(compareByElo);
+        List<Player> p = list(0, 9);
+//        log.info("Sorting");
+//        p.sort(compareByElo);
+//        log.info("Sorting finished");
 
         List<Player> t1 = new ArrayList<>();
         List<Player> t2 = new ArrayList<>();
@@ -89,6 +94,8 @@ public class PlayerServiceImplementation implements PlayerService{
         //We can heuristically generate the teams by just doing even-odd separation
         //Fix this for loop, it is very messy and will produce a lot of errors
 
+        log.info("Starting Teams base");
+
         for(int i = 0; i < p.size(); i++){
             if(i%2 == num){
                 t1.add(p.get(i));
@@ -99,6 +106,8 @@ public class PlayerServiceImplementation implements PlayerService{
                 sumT2 += p.get(i).getElo();
             }
         }
+
+        log.info("Finished Creating original Team");
 
         //At this point, we have our two even-odd lists that are ordered, we can now get the
         //values we need
@@ -234,10 +243,25 @@ public class PlayerServiceImplementation implements PlayerService{
         return res;
     }
 
+    /*
+        Some Notes on this function
+
+        This function is basically useless, but it helps make everything look pretty?
+
+        balanceTeams(int num) returns a Teams object that holds a priority queue of the sorted teams.
+        The "num" part of it is also essentially useless, but it switches which side the teams are on. If num == 0,
+        then team 1 will be team 1, but if num == 1, then the team 1 of num == 0 will switch to team 2. This doesn't do
+        much, but it might provide functionality in the future, so im keeping it.
+
+        getTeams(int num) returns the sorted teams in a list format, but at a limit of num. If you want the 10 best teams,
+        then num == 10.
+
+         */
+
     @Override
-    public List<Team> printOutTeams(){
+    public List<Team> printOutTeams(int amount){
         log.info("Starting to make Teams");
-        log.info("Printing out Teams");
-        return this.balanceTeams(0).getTeams();
+
+        return this.balanceTeams(0).getTeams(amount);
     }
 }

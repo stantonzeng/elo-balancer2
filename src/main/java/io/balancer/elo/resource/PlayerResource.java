@@ -41,26 +41,35 @@ public class PlayerResource {
                 .build());
     }
 
-    @GetMapping("/list")
+    @GetMapping("/response_list")
     public ResponseEntity<Response> getList(){
         return ResponseEntity.ok(Response.builder()
                 .timeStamp(now())
-                .data(Map.of("players", playerServiceImplementation.list(10)))
+                .data(Map.of("players", playerServiceImplementation.list(0, 10)))
                 .message("Players retrieved")
                 .status(OK)
                 .statusCode(OK.value())
                 .build());
     }
 
-    @GetMapping("/list_test")
-    public List<Player> getListTest(){
-        return playerServiceImplementation.listTest();
+    @GetMapping("/list/{start}/{end}")
+    public List<Player> getListLimit(@PathVariable("start") int start, @PathVariable("end") int end){
+        return playerServiceImplementation.list(start, end);
     }
 
+    @GetMapping("/full_list")
+    public List<Player> getFullList(){
+        return playerServiceImplementation.fullList();
+    }
 
     @GetMapping("/balanceTeams")
     public List<Team> getBalancedTeams(){
-        return playerServiceImplementation.printOutTeams();
+        return playerServiceImplementation.printOutTeams(-1);
+    }
+
+    @GetMapping("/balanceTeams/{amount}")
+    public List<Team> getBalancedTeams(@PathVariable("amount") int amount){
+        return playerServiceImplementation.printOutTeams(amount);
     }
 
     @PostMapping("/add") //Post request, adds new players into the system

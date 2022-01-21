@@ -39,10 +39,13 @@ public class Teams {
 
     private List<Team> sortedTeams = new ArrayList<>();
 
-    public List<Team> getTeams(){
-        while(!this.teams.isEmpty()){
+    public List<Team> getTeams(int cnt){
+        if (cnt == -1)
+            cnt = this.teams.size();
+        while(!this.teams.isEmpty() && cnt > 0){
 //            log.info(temp.poll().printAllPlayers() + "\n");
             sortedTeams.add(this.teams.poll());
+            cnt--;
         }
         return this.sortedTeams;
     }

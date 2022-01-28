@@ -114,16 +114,13 @@ public class PlayerServiceImplementation implements PlayerService{
         //At this point, we have our two even-odd lists that are ordered, we can now get the
         //values we need
 
-        Team logger = new Team(t1, t2, sumT1, sumT2);
-        log.info("Original Set: " + logger.printAllPlayers());
-
         implementedTeams.addToList(new Team(t1, t2, sumT1, sumT2));
 
         //We will use these 2 values to help with swapping players
         Player tempSwap = null;
-        int pos2 = 0;
-
         Player tempSwap2 = null;
+
+        int pos2 = 0;
 
         // |------------------------------------------- SINGLE SWAP START -------------------------------------------|
         for(int i = 0; i < t1.size(); i++){
@@ -145,7 +142,7 @@ public class PlayerServiceImplementation implements PlayerService{
             swappedT2.set(pos2, swappedT1.get(i));
             swappedT1.set(i, tempSwap);
 
-            log.info("Switching values at index " + i + " with " + pos2);
+//            log.info("Switching values at index " + i + " with " + pos2);
 //            log.info("New Set: " + tempT.printAllPlayers());
 
             //The swap should work... test to make sure
@@ -268,7 +265,13 @@ public class PlayerServiceImplementation implements PlayerService{
 
     @Override
     public String gameResults(int index, int win){
-        this._teams.adjustElo(index, win);
+        Team t = this._teams.adjustElo(index, win);
+        for(int i = 0; i < t.getTeam1().size(); i++){
+            update(t.getTeam1().get(i));
+        }
+        for(int i = 0; i < t.getTeam2().size(); i++){
+            update(t.getTeam2().get(i));
+        }
         return "Team " + win+1 + " won";
     }
 }

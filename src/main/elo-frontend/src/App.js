@@ -32,17 +32,7 @@ const PlayerProfiles = () => {
   })
 }
 
-// const AddPlayerProfiles = () => {
-//   const AddP = () =>{
-//     const player = {};
-//     axios.post('http://localhost:8080/api/player/add', player)
-//       .then(response => setPlayerId(response.data.id));
-//   }
 
-//   useEffect(() => {
-//     AddP();
-//   }, []);
-// }
 
 class PostForm extends Component{
 
@@ -111,3 +101,27 @@ function App() {
 }
 
 export default App;
+
+/*
+Comment Hell:
+
+const AddPlayerProfiles = () => {
+  const AddP = () =>{
+    const player = {};
+    axios.post('http://localhost:8080/api/player/add', player)
+      .then(response => setPlayerId(response.data.id));
+  }
+
+  useEffect(() => {
+    AddP();
+  }, []);
+}
+
+
+
+---------------------------------------------------------------
+
+
+
+
+*/

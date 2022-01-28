@@ -11,6 +11,7 @@ import java.util.*;
 @Slf4j
 public class Teams {
     public Teams() {
+        //At some point we will have to change initial Capacity
         this.teams = new PriorityQueue<Team>(10, new Comparator<Team>() {
             @Override
             public int compare(Team o1, Team o2) {
@@ -19,16 +20,6 @@ public class Teams {
                 else return 0;
             }
         });
-    }
-
-
-
-    public void addEntireListToQueue(@NotNull Teams t){
-        Iterator it = t.getTeams().iterator();
-
-        while(it.hasNext()){
-            addToList((Team) it.next());
-        }
     }
 
     public void addToList(Team t){
@@ -51,7 +42,7 @@ public class Teams {
         return this.sortedTeams;
     }
 
-    public void adjustElo(int index, int win){
-        this.sortedTeams.get(index).adjustRatings(win);
+    public Team adjustElo(int index, int win){
+        return this.sortedTeams.get(index).adjustRatings(win);
     }
 }

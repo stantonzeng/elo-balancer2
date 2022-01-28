@@ -23,7 +23,17 @@ public class Player {
     @Column(unique = true) //All name values have to be unique, maps the value name to a database column
     private String name;
 
-    private int streak;
-    private int numGamesPlayed;
+    private double streak;
+
+    public void incrementStreak(){
+        this.streak += 1.0;
+    }
+    public void decrementStreak(){
+        this.streak -= 1.0;
+    }
+
+    public double getStreakBonus(){
+        return 1.0+Math.pow(Math.abs(this.streak/12.0),2);
+    }
 
 }

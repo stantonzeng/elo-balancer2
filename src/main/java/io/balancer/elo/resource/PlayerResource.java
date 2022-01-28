@@ -81,7 +81,7 @@ public class PlayerResource {
                 .status(CREATED)
                 .statusCode(CREATED.value())
                 .build());
-    }
+}
 
     @PostMapping("/add") //Post request, adds new players into the system
     public ResponseEntity<Response> addPlayer(@RequestBody @Valid Player player){

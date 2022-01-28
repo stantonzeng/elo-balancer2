@@ -16,16 +16,16 @@ public class EloApplication{
 	@Bean
 	CommandLineRunner run(PlayerRepository playerRepo){
 		return args -> {
-			playerRepo.save(new Player(null, 1558.0, "bterabtragdsa", 0, 0));
-			playerRepo.save(new Player(null, 1160.0, "My Cat Says Meow", 0, 0));
-			playerRepo.save(new Player(null, 1893.0, "bubblysoju", 0, 0));
-			playerRepo.save(new Player(null, 1524.0, "pagchompu", 0, 0));
-			playerRepo.save(new Player(null, 1001.0, "Shamusa", 0, 0));
-			playerRepo.save(new Player(null, 1636.0, "asdgartbaretb", 0, 0));
-			playerRepo.save(new Player(null, 1222.0, "ShadowStriker", 0, 0));
-			playerRepo.save(new Player(null, 1279.0, "Mitsuki Moon", 0, 0));
-			playerRepo.save(new Player(null, 1554.0, "Ally of Women", 0, 0));
-			playerRepo.save(new Player(null, 1618.0, "Lionblaze219", 0, 0));
+			playerRepo.save(new Player(null, 1558.0, "bterabtragdsa", 0));
+			playerRepo.save(new Player(null, 1160.0, "My Cat Says Meow", 0));
+			playerRepo.save(new Player(null, 1893.0, "bubblysoju", 0));
+			playerRepo.save(new Player(null, 1524.0, "pagchompu", 0));
+			playerRepo.save(new Player(null, 1001.0, "Shamusa", 0));
+			playerRepo.save(new Player(null, 1636.0, "asdgartbaretb", 0));
+			playerRepo.save(new Player(null, 1222.0, "ShadowStriker", 0));
+			playerRepo.save(new Player(null, 1279.0, "Mitsuki Moon", 0));
+			playerRepo.save(new Player(null, 1554.0, "Ally of Women", 0));
+			playerRepo.save(new Player(null, 1618.0, "Lionblaze219", 0));
 		};
 	}
 }

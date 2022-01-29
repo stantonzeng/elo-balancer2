@@ -264,7 +264,7 @@ public class PlayerServiceImplementation implements PlayerService{
     }
 
     @Override
-    public String gameResults(int index, int win){
+    public String gameResults(int index, int win) throws Exception {
         Team t = this._teams.adjustElo(index, win);
         for(int i = 0; i < t.getTeam1().size(); i++){
             update(t.getTeam1().get(i));

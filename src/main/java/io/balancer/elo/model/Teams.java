@@ -42,7 +42,10 @@ public class Teams {
         return this.sortedTeams;
     }
 
-    public Team adjustElo(int index, int win){
+    public Team adjustElo(int index, int win) throws Exception {
+        if(this.sortedTeams.size() == 0)
+            throw new Exception("Exception message");
+
         return this.sortedTeams.get(index).adjustRatings(win);
     }
 }

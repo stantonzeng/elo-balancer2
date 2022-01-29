@@ -1,9 +1,6 @@
 package io.balancer.elo.resource;
 
-import io.balancer.elo.model.Player;
-import io.balancer.elo.model.Response;
-import io.balancer.elo.model.Team;
-import io.balancer.elo.model.Teams;
+import io.balancer.elo.model.*;
 import io.balancer.elo.service.PlayerServiceImplementation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -72,11 +69,11 @@ public class PlayerResource {
         return playerServiceImplementation.printOutTeams(amount);
     }
 
-    @PostMapping("/win/{index}/{team}")
-    public ResponseEntity<Response> updateWin(@PathVariable("index") int index, @PathVariable("team") int team){
+    @PostMapping("/win")
+    public ResponseEntity<Response> updateWin(@RequestBody @Valid GameResult gameResult) throws Exception {
         return ResponseEntity.ok(Response.builder()
                 .timeStamp(now())
-                .data(Map.of("Results of game: ", playerServiceImplementation.gameResults(index, team)))
+                .data(Map.of("Results of game: ", playerServiceImplementation.gameResults(0, gameResult.getTeamNumb()))) //Remember to change index of 0 to gameResult.getIndex()
                 .message("Team's elos adjusted")
                 .status(CREATED)
                 .statusCode(CREATED.value())

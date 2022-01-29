@@ -36,5 +36,5 @@ public interface PlayerService {
 
     List<Team> printOutTeams(int amount);
 
-    String gameResults(int index, int win);
+    String gameResults(int index, int win) throws Exception;
 }

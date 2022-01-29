@@ -33,7 +33,7 @@ public class Player {
     }
 
     public double getStreakBonus(){
-        return 1.0+Math.pow(Math.abs(this.streak/12.0),2);
+        return 1.0+(Math.round(Math.pow(Math.abs(this.streak/12.0),2)*1000.0)/1000.0);
     }
 
 }

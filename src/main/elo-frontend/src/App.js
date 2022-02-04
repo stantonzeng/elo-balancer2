@@ -1,17 +1,19 @@
 import './App.css';
 import React, {useState, useEffect, Component} from "react";
-import axios from "axios";
 import PostFormAddPlayer from './Components/PostFormAddPlayer';
 import PostResults from './Components/PostResults';
 import GetPlayerProfiles from './Components/GetPlayerProfiles';
+import { BasicTable } from './Components/BasicTable';
 
-
+//npm install react-table
+//npm install react-select
 
 function App() {
   return (
     <div className="App">
       {/* <GetPlayerProfiles /> */}
-      {/* <PostFormAddPlayer /> */}
+      <PostFormAddPlayer />
+      <BasicTable />
       <PostResults />
     </div>
   );  

@@ -6,14 +6,10 @@ const GetPlayerProfiles = () => {
     const [pProfiles, setPlayerProfiles] = useState([]);
     //pProfiles is an object, setPlayerProfiles is a function that uses
     //pProfiles, and useState is an array that holds all of the pProfiles.
-  
-    const [retData, setReturnData] = useState([]);
 
     const fetchPlayerProfiles = () =>{
       axios.get('http://localhost:8080/api/player/full_list').then(res => {
         setPlayerProfiles(res.data);
-        setReturnData(res.data);
-        console.log(res.data);
       });
     }
   

@@ -23,7 +23,7 @@ public class EloApplication{
 			playerRepo.save(new Player(null, 1001.0, "Shamusa", 0));
 			playerRepo.save(new Player(null, 1636.0, "asdgartbaretb", 0));
 			playerRepo.save(new Player(null, 1222.0, "ShadowStriker", 0));
-			playerRepo.save(new Player(null, 1279.0, "Mitsuki Moon", 0));
+			playerRepo.save(new Player(null, 1279.0, "Mitsuki Moon",	 0));
 			playerRepo.save(new Player(null, 1554.0, "Ally of Women", 0));
 			playerRepo.save(new Player(null, 1618.0, "Lionblaze219", 0));
 		};

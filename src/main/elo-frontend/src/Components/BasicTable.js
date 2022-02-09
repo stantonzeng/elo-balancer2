@@ -13,9 +13,9 @@ export const BasicTable = () => {
     
     obj.then(res => {
         // console.log(res.data);
-        setPlayerProfiles(res.data)});
+        setPlayerProfiles(res.data)
+    });
     
-
     const columns = useMemo(() => COLUMNS, [])
     const data = pProfiles;
     

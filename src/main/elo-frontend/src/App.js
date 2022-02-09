@@ -4,6 +4,7 @@ import PostFormAddPlayer from './Components/PostFormAddPlayer';
 import PostResults from './Components/PostResults';
 import GetPlayerProfiles from './Components/GetPlayerProfiles';
 import { BasicTable } from './Components/BasicTable';
+import { EloSum1, ListTeams1, ListTeams2 } from './Components/ListTeams';
 
 //npm install react-table
 //npm install react-select
@@ -12,9 +13,12 @@ function App() {
   return (
     <div className="App">
       {/* <GetPlayerProfiles /> */}
-      <PostFormAddPlayer />
+      {/* <PostFormAddPlayer />
       <BasicTable />
-      <PostResults />
+      <PostResults /> */}
+      <ListTeams1 />
+      {/* <EloSum1 /> */}
+      <ListTeams2 />
     </div>
   );  
 }

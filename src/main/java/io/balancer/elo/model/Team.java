@@ -16,6 +16,19 @@ public class Team{
 
     }
     public Team(List<Player> t1, List<Player> t2, double sumElo1, double sumElo2){
+//        List<Player> newT1 = new ArrayList<>();
+//        List<Player> newT2 = new ArrayList<>();
+//        for(int i = 0; i < t1.size(); i++){
+//            Player1 p1 = new Player1(t1.get(i));
+//            newT1.add(p1);
+//        }
+//        for(int i = 0; i < t2.size(); i++){
+//            Player2 p2 = new Player2(t2.get(i));
+//            newT2.add(p2);
+//        }
+//        this.team1 = newT1;
+//        this.team2 = newT2;
+        //This is just to get around react-table's duplicaate accessory problem. If I do ever solve that problem, then uncomment out the two lines below...
         this.team1 = t1;
         this.team2 = t2;
 

@@ -1,3 +1,3 @@
 # elo-balancer2
-web app :D
-something something version control
+web app to help balance teams in custom game modes for people who play video games.
+Version Control

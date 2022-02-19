@@ -56,17 +56,6 @@ export const ListTeams1 = () => {
     )
 }
 
-// export const EloSum1 = () => {
-//     const eloSum1 = obj.then(res => {return res.data[0].sumEloT1})
-//     return(
-//         <div>
-//             <p>
-//                 Team elo (1): {eloSum1} 
-//             </p>
-//         </div>
-//     )
-// }
-
 export const ListTeams2 = () => {
     const [pProfiles, setPlayerProfiles] = useState([]);
     

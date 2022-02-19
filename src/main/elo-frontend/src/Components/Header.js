@@ -9,7 +9,7 @@ const HeaderLink = ({ page, selected }) => {
     className += 'headerlink-title';
 
     return (
-        <Link to={`/${page}`} className='headerlink-title'>
+        <Link to={`/${page}`} className={className}>
             {title}
             <div className={selected ? 'headerlink-dot-active' : 'headerlink-dot'}>•</div>
         </Link>);

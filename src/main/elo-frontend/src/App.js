@@ -13,14 +13,8 @@ import Navbar from './Components/Navbar';
 function App() {
   return (
     <div className="App">
-      {/* <GetPlayerProfiles /> */}
-      {/* <PostFormAddPlayer />
-      <BasicTable />
-      <PostResults /> */}
-      {/* <ListTeams1 /> */}
-      {/* <EloSum1 /> */}
-      {/* <ListTeams2 /> */}
       <Navbar />
+      {/* <BasicTable /> */}
     </div>
   );  
 }

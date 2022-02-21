@@ -24,9 +24,11 @@ function Navbar() {
                 <Route path = '/:page' element = {<Header/>} />
                 <Route path='/' element={<Header/>} />
 
+                <Route exact path='' element = {<Home/>}/>
                 <Route exact path='home' element = {<Home/>}/>
                 <Route exact path='players' element = {<BasicTable/>}/>
                 <Route exact path='about' element = {<About/>}/>
+                <Route path="*" element={<Home />} />
             </Routes>
         </BrowserRouter>
     )

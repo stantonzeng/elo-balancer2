@@ -173,7 +173,10 @@
       <workItem from="1645180337920" duration="607000" />
       <workItem from="1645251614169" duration="1000" />
       <workItem from="1645271068592" duration="620000" />
-      <workItem from="1645303279619" duration="1215000" />
+      <workItem from="1645303279619" duration="1247000" />
+      <workItem from="1645334972220" duration="303000" />
+      <workItem from="1645356719620" duration="813000" />
+      <workItem from="1645442393586" duration="1480000" />
     </task>
     <task id="LOCAL-00001" summary="Started to implement double swap method. Will need to fix tracker and find position method">
       <created>1642595937131</created>

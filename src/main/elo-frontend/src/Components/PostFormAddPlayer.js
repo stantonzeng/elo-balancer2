@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import axios from "axios";
+import '../App.css';
 
 class PostFormAddPlayer extends Component{
 
@@ -13,44 +14,57 @@ class PostFormAddPlayer extends Component{
     }
   }
 
-  handleChange = (e) =>{
+  handleChangeName = (e) =>{
     this.setState({
       [e.target.name]: e.target.value
     })
   }
+  handleChangeElo = (e) =>{
+    this.setState({
+      [e.target.elo]: e.target.value
+    })
+  }
 
   handleSubmit = (e) => {
-    // e.preventDefault();
     axios.post('http://localhost:8080/api/player/add', this.state)
     .then(response => {
       console.log(response.data);
     })
-    // console.log(this.state);
   }
 
   render(){
     const{elo, name} = this.state;
     return(
-      <div>
+      <div className = "full-table-players">
         <form onSubmit = {this.handleSubmit}>
-          <div>
-            <label>Name</label>
-            <input 
-              type = 'text' 
-              name = 'name' 
-              value = {name}
-              onChange = {this.handleChange}></input>
+          <div className = "label-and-input">
+            <div>
+              <label>Name</label>
+              <input 
+                type = 'text' 
+                name = 'name' 
+                value = {name}
+                onChange = {this.handleChangeName}></input>
+            </div>
+            <div>
+              <label>Elo</label>
+              <input 
+                onKeyPress={(event) => {
+                  if (!/[0-9]/.test(event.key)) {
+                    event.preventDefault();
+                  }
+                }}
+                name = 'elo' 
+                value = {elo}
+                onChange = {event => this.setState({elo: event.target.value.replace(/\D/,'')})}></input>
+            </div>
           </div>
           <div>
-            <label>Elo</label>
-            <input 
-              type = 'number' 
-              name = 'elo' 
-              value = {elo}
-              onChange = {this.handleChange}></input>
-          </div>
-          <div>
-            <button type = 'submit'>Submit</button>
+            <button class = {(!(this.state.name.length > 0) || !(this.state.elo.length > 0)) ? "invalid-button" : "button"} type = 'submit' disabled={!(this.state.name.length > 0) || !(this.state.elo.length > 0)}>
+              <span class="text">
+                Add Player
+              </span>
+              </button>
           </div>
         </form>
       </div>
@@ -59,3 +73,4 @@ class PostFormAddPlayer extends Component{
 }
 
 export default PostFormAddPlayer
+//class = {(!(this.state.name.length > 0) || !(this.state.elo.length > 0)) ? "invalid-button" : "button"}

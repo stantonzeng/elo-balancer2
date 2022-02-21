@@ -4,6 +4,7 @@ import {COLUMNS} from './Columns'
 import axios from "axios";
 import './table.css'
 import Header from './Header';
+import PostFormAddPlayer from './PostFormAddPlayer';
 
 const obj = axios.get('http://localhost:8080/api/player/full_list');
 
@@ -29,7 +30,9 @@ export const BasicTable = () => {
     const{ getTableProps, getTableBodyProps, headerGroups, rows, prepareRow} = tableInstance
     
     return (
-        <><Header /><table {...getTableProps()}>
+        <><Header />
+        <div  className = "full-table-players">
+        <table {...getTableProps()}>
             <thead>
                 {headerGroups.map((headerGroup) => (
                     <tr {...headerGroup.getHeaderGroupProps()}>
@@ -50,10 +53,10 @@ export const BasicTable = () => {
                         </tr>
                     );
                 })}
-                <tr>
-                    <td></td>
-                </tr>
             </tbody>
-        </table></>
+        </table>
+        </div>
+        <PostFormAddPlayer/></>
+
     )
 }

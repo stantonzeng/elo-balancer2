@@ -60,8 +60,8 @@ class PostFormAddPlayer extends Component{
             </div>
           </div>
           <div>
-            <button class = {(!(this.state.name.length > 0) || !(this.state.elo.length > 0)) ? "invalid-button" : "button"} type = 'submit' disabled={!(this.state.name.length > 0) || !(this.state.elo.length > 0)}>
-              <span class="text">
+            <button className = {(!(this.state.name.length > 0) || !(this.state.elo.length > 0)) ? "invalid-button" : "button"} type = 'submit' disabled={!(this.state.name.length > 0) || !(this.state.elo.length > 0)}>
+              <span className="text">
                 Add Player
               </span>
               </button>
@@ -73,4 +73,3 @@ class PostFormAddPlayer extends Component{
 }
 
 export default PostFormAddPlayer
-//class = {(!(this.state.name.length > 0) || !(this.state.elo.length > 0)) ? "invalid-button" : "button"}

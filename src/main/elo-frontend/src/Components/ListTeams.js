@@ -4,10 +4,14 @@ import {COLUMNS_TEAMS_1, COLUMNS_TEAMS_2} from './Columns'
 import axios from "axios";
 import './table.css'
 
-const obj = axios.get('http://localhost:8080/api/player/balanceTeams/10');
+console.log("Why");
+const obj = axios.get('http://localhost:8080/api/player/balanceTeams');
+console.log("does this fail");
 obj.then(res => console.log(res.data[0]));
 
 export const ListTeams1 = () => {
+    
+    
     const [pProfiles, setPlayerProfiles] = useState([]);
     const [elo1, setElo1] = useState([]);
     obj.then(res => {
@@ -47,9 +51,6 @@ export const ListTeams1 = () => {
                         </tr>
                     );
                 })}
-                <tr>
-                    <td></td>
-                </tr>
             </tbody>
         </table>
         <p>Elo Difference: {elo1}</p></>
@@ -99,10 +100,14 @@ export const ListTeams2 = () => {
                         )
                     })
                 }
-                <tr>
-                    <td></td>
-                </tr>
             </tbody>
         </table>
+    )
+}
+export const ListTeamsBoth = () => {
+    return(
+        <div>
+            <ListTeams1/><ListTeams2/> 
+        </div>
     )
 }

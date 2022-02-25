@@ -61,7 +61,7 @@ public class PlayerResource {
 
     @GetMapping("/balanceTeams")
     public List<Team> getBalancedTeams(){
-        return playerServiceImplementation.printOutTeams(-1);
+        return playerServiceImplementation.printOutTeams(5);
     }
 
     @GetMapping("/balanceTeams/{amount}")
@@ -86,6 +86,17 @@ public class PlayerResource {
                 .timeStamp(now())
                 .data(Map.of("Adding", playerServiceImplementation.create(player)))
                 .message("Player added")
+                .status(CREATED)
+                .statusCode(CREATED.value())
+                .build());
+    }
+
+    @PostMapping("/selectedPlayers")
+    public ResponseEntity<Response> selectingPlayers(@RequestBody @Valid List<Player> gamers){
+        return ResponseEntity.ok(Response.builder()
+                .timeStamp(now())
+                .data(Map.of("Adding", playerServiceImplementation.setPostedPlayers(gamers)))
+                .message("Gamers Added")
                 .status(CREATED)
                 .statusCode(CREATED.value())
                 .build());

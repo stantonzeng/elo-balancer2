@@ -22,6 +22,17 @@ public class PlayerServiceImplementation implements PlayerService{
 
     private Teams _teams;
 
+    public List<Player> postedPlayers;
+
+    public List<Player> setPostedPlayers(List<Player> _postedPlayers) {
+        this.postedPlayers = _postedPlayers;
+        log.info("Setting the players in");
+        for(int i = 0; i < _postedPlayers.size(); i++){
+            log.info("Adding Player: {}", _postedPlayers.get(i).getName());
+        }
+        return this._playerRepo.findAll();
+    }
+
     public PlayerServiceImplementation(PlayerRepository playerRepo) {
         _playerRepo = playerRepo;
     }
@@ -76,11 +87,11 @@ public class PlayerServiceImplementation implements PlayerService{
     just call the Teams Priority queue and pop out the first 10 values.
      */
     @Override
-    public Teams balanceTeams(int num){
+    public Teams balanceTeams(){
         log.info("Starting Balancing Teams");
 
         //p will hold all the players (Up to size 10) taken by listTest()
-        List<Player> p = list(0, 10);
+        List<Player> p = postedPlayers;
 //        log.info("Sorting");
 //        p.sort(compareByElo);
 //        log.info("Sorting finished");
@@ -99,7 +110,7 @@ public class PlayerServiceImplementation implements PlayerService{
         log.info("Starting Teams base");
 
         for(int i = 0; i < p.size(); i++){
-            if(i%2 == num){
+            if(i%2 == 0){
                 t1.add(p.get(i));
                 sumT1 += p.get(i).getElo();
             }
@@ -259,8 +270,7 @@ public class PlayerServiceImplementation implements PlayerService{
     @Override
     public List<Team> printOutTeams(int amount){
         log.info("Starting to make Teams");
-
-        return this.balanceTeams(0).getTeams(amount);
+        return this.balanceTeams().getTeams(amount);
     }
 
     @Override

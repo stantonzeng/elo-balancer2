@@ -3,6 +3,7 @@ import {BrowserRouter,Routes,Route} from "react-router-dom";
 import React from 'react'
 import Header from './Header';
 import { BasicTable } from './BasicTable';
+import { ListTeamsBoth } from "./ListTeams";
 import '../App.css';
 
 const Home = () => (
@@ -26,8 +27,9 @@ function Navbar() {
 
                 <Route exact path='' element = {<Home/>}/>
                 <Route exact path='home' element = {<Home/>}/>
-                <Route exact path='players' element = {<BasicTable/>}/>
+                <Route exact path='players/*' element = {<BasicTable/>}/>
                 <Route exact path='about' element = {<About/>}/>
+                <Route exact path="listTeams" element = {<ListTeamsBoth/>}/>
                 <Route path="*" element={<Home />} />
             </Routes>
         </BrowserRouter>

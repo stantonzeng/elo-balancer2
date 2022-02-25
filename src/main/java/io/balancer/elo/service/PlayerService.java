@@ -17,7 +17,7 @@ public interface PlayerService {
 
     List<Player> fullList();
 
-    Teams balanceTeams(int num);
+    Teams balanceTeams();
 
     /*
     Overall, we have 3 different classes, a Player class, a Team class, and a Teams class (creative, I know...). The Team class

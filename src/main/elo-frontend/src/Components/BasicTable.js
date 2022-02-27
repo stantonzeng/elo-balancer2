@@ -13,6 +13,7 @@ export const BasicTable = () => {
     
     //https://stackoverflow.com/questions/48980380/returning-data-from-axios-api
     //https://stackoverflow.com/questions/61925957/using-an-api-to-create-data-in-a-react-table Use this instead of usememo
+
     const [pProfiles, setPlayerProfiles] = useState([]);
     const [selectedProfiles, setSelectedProfiles] = useState([]);
 
@@ -30,6 +31,7 @@ export const BasicTable = () => {
         // e.preventDefault();
         console.log(selectedProfiles);
         axios.post('http://localhost:8080/api/player/selectedPlayers', selectedProfiles);
+        
         navigate("/listTeams")
     }
     

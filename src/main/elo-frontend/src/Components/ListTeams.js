@@ -1,23 +1,61 @@
-import React, {useState, useMemo} from 'react'
+import React, {useState, useMemo, useEffect} from 'react'
 import { useTable} from 'react-table'
 import {COLUMNS_TEAMS_1, COLUMNS_TEAMS_2} from './Columns'
 import axios from "axios";
-import './table.css'
+import './table.css';
+import useSWR from 'swr'
 
-console.log("Why");
-const obj = axios.get('http://localhost:8080/api/player/balanceTeams');
-console.log("does this fail");
-obj.then(res => console.log(res.data[0]));
 
-export const ListTeams1 = () => {
+// const useFetchData = () => {
+//     const [data, setData] = useState({});
+//     useEffect(() => {
+//       const fetchData = async () => {
+//           const { data: response } = await axios.get('http://localhost:8080/api/player/balanceTeams');
+//           setData(response);
+//       };
+//       fetchData();
+//         // axios.get('http://localhost:8080/api/player/balanceTeams').then(response => setData(response.data));
+//     }, []);
+    
+//     return data;
+//   };
+
+export function ListTeamsBoth () {
+    // const location = useLocation();
+    // console.log("LOCATION FOR LSIT: ");
+    // console.log(location);
+    const fetcher = url => axios.get(url).then(res => res.data)
+    setTimeout(() => {
+        console.log("Waiting...");
+    }, 100);
+    const { data, error } = useSWR('http://localhost:8080/api/player/balanceTeams', fetcher)
+    if (error) console.log("lol");
+    if (!data) return <div>loading...</div>
+
+    const newData = data;
+    console.log(newData);
+    console.log(newData[0]);
+    return(
+        <div>
+            <ListTeams1 props = {newData}/><ListTeams2 props = {newData}/> 
+        </div>
+    )
+}
+
+export function ListTeams1 (props){
     
     
     const [pProfiles, setPlayerProfiles] = useState([]);
-    const [elo1, setElo1] = useState([]);
-    obj.then(res => {
-        setElo1(res.data[0].eloDifference);
-        setPlayerProfiles(res.data[0].team1)
-    });
+    const [elo1, setElo1] = useState();
+
+    console.log(props.props);
+    console.log(props.props[0]);
+
+    useEffect(() => {
+        setElo1(props.props[0].eloDifference);
+        setPlayerProfiles(props.props[0].team1);
+    }, [props]);
+    
     
     const columns = useMemo(() => COLUMNS_TEAMS_1, [])
     const data = pProfiles;
@@ -57,14 +95,14 @@ export const ListTeams1 = () => {
     )
 }
 
-export const ListTeams2 = () => {
+export function ListTeams2 (props) {
     const [pProfiles, setPlayerProfiles] = useState([]);
     
-    obj.then(res => {
-        // console.log(res.data);
-        setPlayerProfiles(res.data[0].team2)
-    });
-    
+    useEffect(() => {
+        setPlayerProfiles(props.props[0].team2)
+    }, [props]);
+
+
     const columns = useMemo(() => COLUMNS_TEAMS_2, [])
     const data = pProfiles;
     
@@ -102,12 +140,5 @@ export const ListTeams2 = () => {
                 }
             </tbody>
         </table>
-    )
-}
-export const ListTeamsBoth = () => {
-    return(
-        <div>
-            <ListTeams1/><ListTeams2/> 
-        </div>
     )
 }

@@ -2,6 +2,7 @@ package io.balancer.elo.resource;
 
 import io.balancer.elo.model.*;
 import io.balancer.elo.service.PlayerServiceImplementation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +21,7 @@ import static org.springframework.http.HttpStatus.OK;
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/player")
+@Slf4j
 public class PlayerResource {
     private final PlayerServiceImplementation playerServiceImplementation;
 
@@ -29,6 +31,7 @@ public class PlayerResource {
 
     @GetMapping("/get/{id}")
     public ResponseEntity<Response> getPlayer(@PathVariable("id") Long id){
+        log.info("Get Api call: get/{id}");
         return ResponseEntity.ok(Response.builder()
                 .timeStamp(now())
                 .data(Map.of("player", playerServiceImplementation.get(id)))
@@ -40,6 +43,7 @@ public class PlayerResource {
 
     @GetMapping("/response_list")
     public ResponseEntity<Response> getList(){
+        log.info("Get Api call: response_list");
         return ResponseEntity.ok(Response.builder()
                 .timeStamp(now())
                 .data(Map.of("players", playerServiceImplementation.list(0, 10)))
@@ -51,26 +55,31 @@ public class PlayerResource {
 
     @GetMapping("/list/{start}/{end}")
     public List<Player> getListLimit(@PathVariable("start") int start, @PathVariable("end") int end){
+        log.info("Get Api call: list/{start}/{end}");
         return playerServiceImplementation.list(start, end);
     }
 
     @GetMapping("/full_list")
     public List<Player> getFullList(){
+        log.info("Get Api call: full_list");
         return playerServiceImplementation.fullList();
     }
 
     @GetMapping("/balanceTeams")
     public List<Team> getBalancedTeams(){
+        log.info("Get Api call: balanceTeams");
         return playerServiceImplementation.printOutTeams(5);
     }
 
     @GetMapping("/balanceTeams/{amount}")
     public List<Team> getBalancedTeams(@PathVariable("amount") int amount){
+        log.info("Get Api call: balanceTeams/{amount}");
         return playerServiceImplementation.printOutTeams(amount);
     }
 
     @PostMapping("/win")
     public ResponseEntity<Response> updateWin(@RequestBody @Valid GameResult gameResult) throws Exception {
+        log.info("Post Api call: win");
         return ResponseEntity.ok(Response.builder()
                 .timeStamp(now())
                 .data(Map.of("Results of game: ", playerServiceImplementation.gameResults(0, gameResult.getTeamNumb()))) //Remember to change index of 0 to gameResult.getIndex()
@@ -82,6 +91,7 @@ public class PlayerResource {
 
     @PostMapping("/add") //Post request, adds new players into the system
     public ResponseEntity<Response> addPlayer(@RequestBody @Valid Player player){
+        log.info("Post Api call: add");
         return ResponseEntity.ok(Response.builder()
                 .timeStamp(now())
                 .data(Map.of("Adding", playerServiceImplementation.create(player)))
@@ -93,6 +103,7 @@ public class PlayerResource {
 
     @PostMapping("/selectedPlayers")
     public ResponseEntity<Response> selectingPlayers(@RequestBody @Valid List<Player> gamers){
+        log.info("Post Api call: selectedPlayers");
         return ResponseEntity.ok(Response.builder()
                 .timeStamp(now())
                 .data(Map.of("Adding", playerServiceImplementation.setPostedPlayers(gamers)))

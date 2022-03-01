@@ -33,8 +33,6 @@ export function ListTeamsBoth () {
     if (!data) return <div>loading...</div>
 
     const newData = data;
-    console.log(newData);
-    console.log(newData[0]);
     return(
         <div>
             <ListTeams1 props = {newData}/><ListTeams2 props = {newData}/> 
@@ -47,9 +45,6 @@ export function ListTeams1 (props){
     
     const [pProfiles, setPlayerProfiles] = useState([]);
     const [elo1, setElo1] = useState();
-
-    console.log(props.props);
-    console.log(props.props[0]);
 
     useEffect(() => {
         setElo1(props.props[0].eloDifference);

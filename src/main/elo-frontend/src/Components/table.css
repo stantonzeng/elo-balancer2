@@ -16,7 +16,11 @@ table {
   
   /* table tr:nth-child(even){background-color: #f2f2f2;} */
   
-  /* table tr:hover {background-color: #ddd;} */
+  table tr:hover {background-color: rgb(241, 241, 241);}
+
+  .row-selected {
+    background-color: rgb(241, 241, 241);
+  }
   
   table th {
     padding-top: 12px;

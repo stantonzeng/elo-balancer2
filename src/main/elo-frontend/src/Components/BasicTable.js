@@ -1,5 +1,5 @@
-import React, {useState, useMemo} from 'react'
-import { useTable } from 'react-table'
+import React, {useState, useMemo, useEffect} from 'react'
+import { useTable, useRowSelect } from 'react-table'
 import {COLUMNS} from './Columns'
 import axios from "axios";
 import './table.css'
@@ -7,7 +7,13 @@ import Header from './Header';
 import PostFormAddPlayer from './PostFormAddPlayer';
 import {useNavigate} from "react-router-dom";
 
+
 const obj = axios.get('http://localhost:8080/api/player/full_list');
+console.log("hello");
+var rowIDArray;
+var objectID = {};
+
+
 
 export const BasicTable = () => {
     
@@ -16,34 +22,41 @@ export const BasicTable = () => {
 
     const [pProfiles, setPlayerProfiles] = useState([]);
     const [selectedProfiles, setSelectedProfiles] = useState([]);
+    let navigate = useNavigate();
 
     obj.then(res => {setPlayerProfiles(res.data)});
     
     const columns = useMemo(() => COLUMNS, [])
     const data = pProfiles;
 
-    const checker = (e) => {
-        console.log(e);
-        setSelectedProfiles(selectedProfiles => [...selectedProfiles, e]);
+    const checked = (e) => {
+        e.toggleRowSelected();
     }
-
+    
     const handleSubmit = (e) => {
         // e.preventDefault();
         console.log(selectedProfiles);
+        rowIDArray = selectedFlatRows.map(d => d.id);
+        console.log(rowIDArray);
+        objectID = {};
+        rowIDArray.forEach(key => objectID[key] = true);
+        console.log(objectID);
+        // console.log(selectedProfiles.map(row => row.id));
         axios.post('http://localhost:8080/api/player/selectedPlayers', selectedProfiles);
-        
         navigate("/listTeams")
     }
-    
 
-    const tableInstance = useTable({
+    const{ getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, selectedFlatRows} = 
+    useTable({
         columns: columns,
-        data: data
-    })
-
-    const{ getTableProps, getTableBodyProps, headerGroups, rows, prepareRow} = tableInstance
+        data: data,
+        initialState: {selectedRowIds: objectID}
+    }, useRowSelect)
     
-    let navigate = useNavigate();
+    useEffect(() => {
+        setSelectedProfiles(selectedFlatRows.map((row) => row.original));
+    }, [selectedFlatRows]);
+      
     return (
         <><Header />
         <div  className = "full-table-players">
@@ -60,10 +73,9 @@ export const BasicTable = () => {
             <tbody {...getTableBodyProps()}>
                 {rows.map(row => {
                     prepareRow(row);
-                    //() => console.log(row.original)
-                    // () => arrayPlayers.push(row.original)
+                    //condition ? result_if_true : result_if_false
                     return (
-                        <tr {...row.getRowProps()} onClick={() => checker(row.original)}>
+                        <tr {...row.getRowProps()} onClick={() => checked(row)} className={row.isSelected ? 'row-selected' : 'row-not-selected'}>
                             {row.cells.map((cell) => {
                                 return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>;
                             })}

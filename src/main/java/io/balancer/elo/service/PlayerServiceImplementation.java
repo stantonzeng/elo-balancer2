@@ -6,6 +6,7 @@ import io.balancer.elo.model.Team;
 import io.balancer.elo.model.Teams;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -64,7 +65,7 @@ public class PlayerServiceImplementation implements PlayerService{
     @Override
     public List<Player> fullList(){
         log.info("Fetching all players");
-        return _playerRepo.findAll();
+        return _playerRepo.findAll(Sort.by(Sort.Direction.ASC, "id"));
     }
 
 

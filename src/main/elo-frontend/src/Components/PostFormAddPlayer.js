@@ -3,6 +3,7 @@ import axios from "axios";
 import '../App.css';
 
 class PostFormAddPlayer extends Component{
+  
 
   constructor(props){
     super(props);
@@ -26,6 +27,7 @@ class PostFormAddPlayer extends Component{
   }
 
   handleSubmit = (e) => {
+    e.preventDefault();
     axios.post('http://localhost:8080/api/player/add', this.state)
     .then(response => {
       console.log(response.data);

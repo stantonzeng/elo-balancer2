@@ -14,8 +14,8 @@ export function ListTeamsBoth () {
     
     const [sleeping, setSleeping] = useState(true)
 
-    console.log("fetching");
-    const { data, error } = useSWR(sleeping ? null : 'http://localhost:8080/api/player/balanceTeams', fetcher);
+    // console.log("fetching");
+    const { data, error } = useSWR(sleeping ? null : 'http://localhost:8080/api/player/balanceTeams', fetcher, {revalidateOnFocus: false});
 
     useEffect(() => {
         setTimeout(() => {
@@ -26,8 +26,6 @@ export function ListTeamsBoth () {
 
     if (error) console.log("lol");
     if (!data) return <div>loading...</div>
-
-    console.log(data);
 
     const newData = data;
 
@@ -53,7 +51,6 @@ export function ListTeamsBoth () {
 export function ListTeams1 (props){
     
     const [pProfiles, setPlayerProfiles] = useState([]);
-    console.log(props.props);
 
     useEffect(() => {
         setPlayerProfiles(props.props.team1);
@@ -63,8 +60,6 @@ export function ListTeams1 (props){
     const columns = useMemo(() => COLUMNS_TEAMS_1, [])
     const data = pProfiles;
 
-    console.log(data);
-    
     const tableInstance = useTable({
         columns: columns,
         data: data

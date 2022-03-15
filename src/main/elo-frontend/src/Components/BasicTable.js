@@ -5,7 +5,7 @@ import axios from "axios";
 import './table.css'
 import Header from './Header';
 import PostFormAddPlayer from './PostFormAddPlayer';
-import useSWR from 'swr';
+import useSWR from 'swr'
 import {useNavigate} from "react-router-dom";
 import { useSortBy } from 'react-table/dist/react-table.development';
 
@@ -13,12 +13,12 @@ var rowIDArray;
 var objectID = {};
 
 export function BasicTable(){
+
     const fetcher = url => axios.get(url).then(res => res.data)
     const [sleeping, setSleeping] = useState(true)
-    
-    console.log("fetching");
 
-    const { data, error } = useSWR(sleeping ? null : 'http://localhost:8080/api/player/full_list', fetcher);
+
+    const { data, error } = useSWR(sleeping ? null : 'http://localhost:8080/api/player/full_list', fetcher, {revalidateOnFocus: false});
     
     useEffect(() => {
         setTimeout(() => {
@@ -62,10 +62,10 @@ export function BasicTableTemp(obj){
         // e.preventDefault();
 
         console.log(selectedProfiles);
-        rowIDArray = selectedFlatRows.map(d => d.id);
+        rowIDArray = selectedProfiles.map(d => d.id);
         console.log(rowIDArray);
         objectID = {};
-        rowIDArray.forEach(key => objectID[key] = true);
+        rowIDArray.forEach(key => objectID[key-1] = true);
         console.log(objectID);
         axios.post('http://localhost:8080/api/player/selectedPlayers', selectedProfiles);
         // window.location = "/listTeams";
@@ -76,7 +76,9 @@ export function BasicTableTemp(obj){
     useTable({
         columns: columns,
         data: data,
-        initialState: {selectedRowIds: objectID}
+        initialState: {
+            selectedRowIds: objectID
+        }
     }, useSortBy, useRowSelect)
     
     useEffect(() => {
@@ -91,7 +93,7 @@ export function BasicTableTemp(obj){
                 {headerGroups.map((headerGroup) => (
                     <tr {...headerGroup.getHeaderGroupProps()}>
                         {headerGroup.headers.map((column) => (
-                            <th {...column.getHeaderProps()}>{column.render('Header')}
+                            <th {...column.getHeaderProps(column.getSortByToggleProps())}>{column.render('Header')}
                             </th>
                         ))}
                     </tr>

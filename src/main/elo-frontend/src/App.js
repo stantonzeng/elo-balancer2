@@ -1,9 +1,6 @@
 import './App.css';
-import React, {useState, useEffect, Component} from "react";
+import React from "react";
 import Navbar from './Components/Navbar';
-
-//npm install react-table
-//npm install react-select
 
 function App() {
   return (

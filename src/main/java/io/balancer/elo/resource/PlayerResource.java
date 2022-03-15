@@ -77,12 +77,12 @@ public class PlayerResource {
         return playerServiceImplementation.printOutTeams(amount);
     }
 
-    @PostMapping("/win")
-    public ResponseEntity<Response> updateWin(@RequestBody @Valid GameResult gameResult) throws Exception {
+    @PostMapping("/win/{index}")
+    public ResponseEntity<Response> updateWin(@RequestBody @Valid GameResult gameResult, @PathVariable String index) throws Exception {
         log.info("Post Api call: win");
         return ResponseEntity.ok(Response.builder()
                 .timeStamp(now())
-                .data(Map.of("Results of game: ", playerServiceImplementation.gameResults(0, gameResult.getTeamNumb()))) //Remember to change index of 0 to gameResult.getIndex()
+                .data(Map.of("Results of game: ", playerServiceImplementation.gameResults(Integer.parseInt(index), gameResult.getTeamNumb()))) //Remember to change index of 0 to gameResult.getIndex()
                 .message("Team's elos adjusted")
                 .status(CREATED)
                 .statusCode(CREATED.value())

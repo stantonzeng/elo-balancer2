@@ -2,58 +2,68 @@ import React, {useState, useMemo, useEffect} from 'react'
 import { useTable} from 'react-table'
 import {COLUMNS_TEAMS_1, COLUMNS_TEAMS_2} from './Columns'
 import axios from "axios";
+import Header from './Header';
 import './table.css';
 import useSWR from 'swr'
-
-
-// const useFetchData = () => {
-//     const [data, setData] = useState({});
-//     useEffect(() => {
-//       const fetchData = async () => {
-//           const { data: response } = await axios.get('http://localhost:8080/api/player/balanceTeams');
-//           setData(response);
-//       };
-//       fetchData();
-//         // axios.get('http://localhost:8080/api/player/balanceTeams').then(response => setData(response.data));
-//     }, []);
-    
-//     return data;
-//   };
+// import useSWRImmutable from 'swr/immutable'
+import { PostResults } from './PostResults';
 
 export function ListTeamsBoth () {
-    // const location = useLocation();
-    // console.log("LOCATION FOR LSIT: ");
-    // console.log(location);
+
     const fetcher = url => axios.get(url).then(res => res.data)
-    setTimeout(() => {
-        console.log("Waiting...");
-    }, 100);
-    const { data, error } = useSWR('http://localhost:8080/api/player/balanceTeams', fetcher)
+    
+    const [sleeping, setSleeping] = useState(true)
+
+    console.log("fetching");
+    const { data, error } = useSWR(sleeping ? null : 'http://localhost:8080/api/player/balanceTeams', fetcher);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setSleeping(false)
+        }, 500)
+    }, [])
+
+
     if (error) console.log("lol");
     if (!data) return <div>loading...</div>
 
+    console.log(data);
+
     const newData = data;
+
     return(
-        <div>
-            <ListTeams1 props = {newData}/><ListTeams2 props = {newData}/> 
+        <>
+        <Header />
+        <div className= "container">
+            <div className="left-team-1">
+                <ListTeams1 props={newData[0]} />
+            </div>
+            <div className = "elo-diff">
+                <p>Elo Difference: {newData[0].eloDifference}</p>
+                <PostResults index = {0}/>
+            </div>
+            <div className="right-team-2">
+                <ListTeams2 props={newData[0]} />
+            </div>
         </div>
+        </>
     )
-}
+}   
 
 export function ListTeams1 (props){
     
-    
     const [pProfiles, setPlayerProfiles] = useState([]);
-    const [elo1, setElo1] = useState();
+    console.log(props.props);
 
     useEffect(() => {
-        setElo1(props.props[0].eloDifference);
-        setPlayerProfiles(props.props[0].team1);
+        setPlayerProfiles(props.props.team1);
     }, [props]);
     
     
     const columns = useMemo(() => COLUMNS_TEAMS_1, [])
     const data = pProfiles;
+
+    console.log(data);
     
     const tableInstance = useTable({
         columns: columns,
@@ -63,7 +73,7 @@ export function ListTeams1 (props){
     const{ getTableProps, getTableBodyProps, headerGroups, rows, prepareRow} = tableInstance
     
     return (
-        <><table {...getTableProps()}>
+        <table {...getTableProps()}>
             <thead>
                 {headerGroups.map((headerGroup) => (
                     <tr {...headerGroup.getHeaderGroupProps()}>
@@ -86,27 +96,25 @@ export function ListTeams1 (props){
                 })}
             </tbody>
         </table>
-        <p>Elo Difference: {elo1}</p></>
     )
 }
 
 export function ListTeams2 (props) {
-    const [pProfiles, setPlayerProfiles] = useState([]);
+    const [pProfiles_2, setPlayerProfiles_2] = useState([]);
     
     useEffect(() => {
-        setPlayerProfiles(props.props[0].team2)
+        setPlayerProfiles_2(props.props.team2)
     }, [props]);
 
 
-    const columns = useMemo(() => COLUMNS_TEAMS_2, [])
-    const data = pProfiles;
+    const columns_2 = useMemo(() => COLUMNS_TEAMS_2, [])
     
-    const tableInstance = useTable({
-        columns: columns,
-        data: data
+    const tableInstance_2 = useTable({
+        columns: columns_2,
+        data: pProfiles_2
     })
 
-    const{ getTableProps, getTableBodyProps, headerGroups, rows, prepareRow} = tableInstance
+    const{ getTableProps, getTableBodyProps, headerGroups, rows, prepareRow} = tableInstance_2
     
     return (
         <table {...getTableProps()}>

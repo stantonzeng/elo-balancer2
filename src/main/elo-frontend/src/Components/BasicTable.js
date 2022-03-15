@@ -1,21 +1,42 @@
-import React, {useState, useMemo, useEffect} from 'react'
+import React, {useState, useMemo, useEffect } from 'react'
 import { useTable, useRowSelect } from 'react-table'
 import {COLUMNS} from './Columns'
 import axios from "axios";
 import './table.css'
 import Header from './Header';
 import PostFormAddPlayer from './PostFormAddPlayer';
+import useSWR from 'swr';
 import {useNavigate} from "react-router-dom";
+import { useSortBy } from 'react-table/dist/react-table.development';
 
-
-const obj = axios.get('http://localhost:8080/api/player/full_list');
-console.log("hello");
 var rowIDArray;
 var objectID = {};
 
+export function BasicTable(){
+    const fetcher = url => axios.get(url).then(res => res.data)
+    const [sleeping, setSleeping] = useState(true)
+    
+    console.log("fetching");
 
+    const { data, error } = useSWR(sleeping ? null : 'http://localhost:8080/api/player/full_list', fetcher);
+    
+    useEffect(() => {
+        setTimeout(() => {
+            setSleeping(false)
+        }, 500)
+    }, [])
 
-export const BasicTable = () => {
+    if (error) console.log("lol");
+    if (!data) return <div className = "loading">loading...</div>
+
+    return(
+        <BasicTableTemp obj = {data}/>
+    )
+
+}
+
+export function BasicTableTemp(obj){
+    
     
     //https://stackoverflow.com/questions/48980380/returning-data-from-axios-api
     //https://stackoverflow.com/questions/61925957/using-an-api-to-create-data-in-a-react-table Use this instead of usememo
@@ -24,9 +45,13 @@ export const BasicTable = () => {
     const [selectedProfiles, setSelectedProfiles] = useState([]);
     let navigate = useNavigate();
 
-    obj.then(res => {setPlayerProfiles(res.data)});
+    // listData.then(res => {setPlayerProfiles(res.data)});
+    useEffect(() => {
+        setPlayerProfiles(obj.obj);
+    }, [obj]);
     
-    const columns = useMemo(() => COLUMNS, [])
+    
+    const columns = useMemo(() => COLUMNS, []);
     const data = pProfiles;
 
     const checked = (e) => {
@@ -35,14 +60,15 @@ export const BasicTable = () => {
     
     const handleSubmit = (e) => {
         // e.preventDefault();
+
         console.log(selectedProfiles);
         rowIDArray = selectedFlatRows.map(d => d.id);
         console.log(rowIDArray);
         objectID = {};
         rowIDArray.forEach(key => objectID[key] = true);
         console.log(objectID);
-        // console.log(selectedProfiles.map(row => row.id));
         axios.post('http://localhost:8080/api/player/selectedPlayers', selectedProfiles);
+        // window.location = "/listTeams";
         navigate("/listTeams")
     }
 
@@ -51,7 +77,7 @@ export const BasicTable = () => {
         columns: columns,
         data: data,
         initialState: {selectedRowIds: objectID}
-    }, useRowSelect)
+    }, useSortBy, useRowSelect)
     
     useEffect(() => {
         setSelectedProfiles(selectedFlatRows.map((row) => row.original));
@@ -65,7 +91,8 @@ export const BasicTable = () => {
                 {headerGroups.map((headerGroup) => (
                     <tr {...headerGroup.getHeaderGroupProps()}>
                         {headerGroup.headers.map((column) => (
-                            <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                            <th {...column.getHeaderProps()}>{column.render('Header')}
+                            </th>
                         ))}
                     </tr>
                 ))}
@@ -92,6 +119,5 @@ export const BasicTable = () => {
             </button>
         </form>
         </>
-
     )
 }

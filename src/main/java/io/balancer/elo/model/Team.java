@@ -6,6 +6,8 @@ import lombok.Data;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import static java.lang.Math.abs;
 
@@ -46,19 +48,19 @@ public class Team{
     private double eloDifference;
 
     public String printAllPlayers(){
-        String t = "[[";
+        StringBuilder t = new StringBuilder("[[");
 
-        for(int i = 0; i <team1.size(); i++){
-            t = t + team1.get(i).getName() + ",";
+        for (Player player : team1) {
+            t.append(player.getName()).append(",");
         }
-        t = t + "]              [";
+        t.append("]              [");
 
-        for(int i = 0; i <team2.size(); i++){
-            t = t + team2.get(i).getName() + ",";
+        for (Player player : team2) {
+            t.append(player.getName()).append(",");
         }
-        t = t + "]";
+        t.append("]");
 
-        return t;
+        return t.toString();
     }
 
     public double calculateExpectedValueT1(){
@@ -87,36 +89,37 @@ public class Team{
 
         double elo1 = 0;
         double elo2 = 0;
-        for(int i = 0; i < team1.size(); i++){
-            team1.get(i).incrementStreak();
-            log.info(String.valueOf(team1.get(i).getStreakBonus()));
-            log.info(String.valueOf(1.0-win-calculateExpectedValueT1()));
+        for (Player value : team1) {
+            value.incrementStreak();
+            log.info(String.valueOf(value.getStreakBonus()));
+            log.info(String.valueOf(1.0 - win - calculateExpectedValueT1()));
+
+            BigDecimal temp = BigDecimal.valueOf(kVal(value.getElo()) * (1 - win - calculateExpectedValueT1())).setScale(2, RoundingMode.HALF_UP);
+            BigDecimal bd1 = BigDecimal.valueOf(value.getStreakBonus() * temp.doubleValue()).setScale(2, RoundingMode.HALF_UP);
+            BigDecimal val1 = BigDecimal.valueOf(value.getElo() + bd1.doubleValue()).setScale(2, RoundingMode.HALF_UP);
 
 
-            log.info("Updating Team 1 Player " + team1.get(i).getName() + "\'s elo(" + team1.get(i).getElo() + "): " +
-                    String.valueOf(team1.get(i).getElo()+Math.round((team1.get(i).getStreakBonus()*kVal(team1.get(i).getElo())*(1-win-calculateExpectedValueT1()))*100.0)/100.0));
-            team1.get(i).setElo(team1.get(i).getElo()
-                    +Math.round((team1.get(i).getStreakBonus()*kVal(team1.get(i).getElo())
-                    *(1-win-calculateExpectedValueT1()))
-                    *100.0)/100.0);
-            elo1 += team1.get(i).getElo();
-            ans1.add(team1.get(i));
+            log.info("Updating Team 1 Player " + value.getName() + "'s elo(" + value.getElo() + "): " +
+                    String.valueOf(value.getElo() + bd1.doubleValue()));
+            value.setElo(val1.doubleValue());
+            elo1 += value.getElo();
+            ans1.add(value);
         }
 
-        for(int i = 0; i < team2.size(); i++){
-            team2.get(i).decrementStreak();
-            log.info(String.valueOf(team2.get(i).getStreakBonus()));
-            log.info(String.valueOf(0+win-calculateExpectedValueT2()));
+        for (Player player : team2) {
+            player.decrementStreak();
+            log.info(String.valueOf(player.getStreakBonus()));
+            log.info(String.valueOf(win - calculateExpectedValueT2()));
 
+            BigDecimal temp = BigDecimal.valueOf(kVal(player.getElo()) * (win - calculateExpectedValueT2())).setScale(2, RoundingMode.HALF_UP);
+            BigDecimal bd2 = BigDecimal.valueOf(player.getStreakBonus() * temp.doubleValue()).setScale(2, RoundingMode.HALF_UP);
+            BigDecimal val2 = BigDecimal.valueOf(player.getElo() + bd2.doubleValue()).setScale(2, RoundingMode.HALF_UP);
 
-            log.info("Updating Team 2 Player " + team2.get(i).getName() + "\'s elo(" + team2.get(i).getElo() + "): " +
-                    String.valueOf(team2.get(i).getElo()+Math.round((team2.get(i).getStreakBonus()*kVal(team2.get(i).getElo())*(0+win-calculateExpectedValueT2()))*100.0)/100.0));
-            team2.get(i).setElo(team2.get(i).getElo()
-                    +Math.round((team2.get(i).getStreakBonus()*kVal(team2.get(i).getElo())
-                    *(0+win-calculateExpectedValueT2()))
-                    *100.0)/100.0);
-            elo2 += team2.get(i).getElo();
-            ans2.add(team2.get(i));
+            log.info("Updating Team 2 Player " + player.getName() + "'s elo(" + player.getElo() + "): " +
+                    String.valueOf(val2.doubleValue()));
+            player.setElo(val2.doubleValue());
+            elo2 += player.getElo();
+            ans2.add(player);
         }
         return new Team(ans1, ans2, elo1, elo2);
     }

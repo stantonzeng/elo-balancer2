@@ -27,8 +27,8 @@ public class PlayerServiceImplementation implements PlayerService{
     public List<Player> setPostedPlayers(List<Player> _postedPlayers) {
         this.postedPlayers = _postedPlayers;
         log.info("Setting the players in");
-        for(int i = 0; i < _postedPlayers.size(); i++){
-            log.info("Adding Player: {}", _postedPlayers.get(i).getName());
+        for (Player postedPlayer : _postedPlayers) {
+            log.info("Adding Player: {}", postedPlayer.getName());
         }
         return this._playerRepo.findAll();
     }

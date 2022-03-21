@@ -23,7 +23,7 @@ export default function Navbar() {
         <BrowserRouter>
             <Routes>
                 <Route path = '/:page' element = {<Header/>} />
-                <Route path='/' element={<Header/>} />
+                <Route path='/' element={<Home/>} />
 
                 <Route exact path='' element = {<Home/>}/>
                 <Route exact path='home' element = {<Home/>}/>

@@ -14,7 +14,6 @@ export function ListTeamsBoth () {
     
     const [sleeping, setSleeping] = useState(true)
 
-    // console.log("fetching");
     const { data, error } = useSWR(sleeping ? null : 'http://localhost:8080/api/player/balanceTeams', fetcher, {revalidateOnFocus: false});
 
     useEffect(() => {
@@ -33,6 +32,9 @@ export function ListTeamsBoth () {
         <>
         <Header />
         <div className= "container">
+            <div className = "team-number">
+                1
+            </div>
             <div className="left-team-1">
                 <ListTeams1 props={newData[0]} />
             </div>
@@ -42,6 +44,66 @@ export function ListTeamsBoth () {
             </div>
             <div className="right-team-2">
                 <ListTeams2 props={newData[0]} />
+            </div>
+        </div>
+        <div className= "container">
+            <div className = "team-number">
+                2
+            </div>
+            <div className="left-team-1">
+                <ListTeams1 props={newData[1]} />
+            </div>
+            <div className = "elo-diff">
+                <p>Elo Difference: {newData[1].eloDifference}</p>
+                <PostResults index = {1}/>
+            </div>
+            <div className="right-team-2">
+                <ListTeams2 props={newData[1]} />
+            </div>
+        </div>
+        <div className= "container">
+            <div className = "team-number">
+                3
+            </div>
+            <div className="left-team-1">
+                <ListTeams1 props={newData[2]} />
+            </div>
+            <div className = "elo-diff">
+                <p>Elo Difference: {newData[2].eloDifference}</p>
+                <PostResults index = {2}/>
+            </div>
+            <div className="right-team-2">
+                <ListTeams2 props={newData[2]} />
+            </div>
+        </div>
+        <div className= "container">
+            <div className = "team-number">
+                4
+            </div>
+            <div className="left-team-1">
+                <ListTeams1 props={newData[3]} />
+            </div>
+            <div className = "elo-diff">
+                <p>Elo Difference: {newData[3].eloDifference}</p>
+                <PostResults index = {3}/>
+            </div>
+            <div className="right-team-2">
+                <ListTeams2 props={newData[3]} />
+            </div>
+        </div>
+        <div className= "container-special">
+            <div className = "team-number">
+                5
+            </div>
+            <div className="left-team-1">
+                <ListTeams1 props={newData[4]} />
+            </div>
+            <div className = "elo-diff">
+                <p>Elo Difference: {newData[4].eloDifference}</p>
+                <PostResults index = {4}/>
+            </div>
+            <div className="right-team-2">
+                <ListTeams2 props={newData[4]} />
             </div>
         </div>
         </>

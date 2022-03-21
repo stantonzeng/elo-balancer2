@@ -11,27 +11,35 @@ const options = [
 
 export const PostResults = (index) => {
   const [teamNumb, setTeamNumb] = useState();
+  const [allowButton, setAllowButton] = useState(false);
+
   let navigate = useNavigate();
 
   const handleSubmit = (e) =>{
-    // e.preventDefault();
     console.log(`http://localhost:8080/api/player/win/${index.index}`);
     axios.post(`http://localhost:8080/api/player/win/${index.index}`, teamNumb);
-    // window.location = "/players";
     navigate("/players");
+  }
+
+  const handleChange = (value) =>{
+    setAllowButton(true);
+    setTeamNumb(value);
   }
 
   return(
     <form onSubmit = {handleSubmit}>
+      
       <div className = "select-button">
       <Select 
         options = {options} 
         value = {teamNumb}
-        onChange = {value => setTeamNumb(value)}
+        onChange = {handleChange}
         placeholder = "Select Winning Team"
       />
+      <button className = {allowButton ? "button-2" : "invalid-button-2"} type = 'submit' disabled={!allowButton}>
+        Submit
+        </button>
       </div>
-      <button type = 'submit'>Submit</button>
     </form>
   )
 }

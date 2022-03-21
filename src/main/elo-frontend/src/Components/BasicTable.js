@@ -3,6 +3,7 @@ import { useTable, useRowSelect } from 'react-table'
 import {COLUMNS} from './Columns'
 import axios from "axios";
 import './table.css'
+import './button.css'
 import Header from './Header';
 import PostFormAddPlayer from './PostFormAddPlayer';
 import useSWR from 'swr'
@@ -12,6 +13,8 @@ import { useSortBy } from 'react-table/dist/react-table.development';
 var rowIDArray;
 var objectID = {};
 
+
+//https://getcssscan.com/css-buttons-examples
 export function BasicTable(){
 
     const fetcher = url => axios.get(url).then(res => res.data)
@@ -43,11 +46,18 @@ export function BasicTableTemp(obj){
 
     const [pProfiles, setPlayerProfiles] = useState([]);
     const [selectedProfiles, setSelectedProfiles] = useState([]);
+    const [allowButton, setAllowButton] = useState(false);
     let navigate = useNavigate();
 
     // listData.then(res => {setPlayerProfiles(res.data)});
     useEffect(() => {
         setPlayerProfiles(obj.obj);
+        if(Object.keys(objectID).length < 4){
+            setAllowButton(false);
+        }
+        else{
+            setAllowButton(true);
+        }
     }, [obj]);
     
     
@@ -83,43 +93,59 @@ export function BasicTableTemp(obj){
     
     useEffect(() => {
         setSelectedProfiles(selectedFlatRows.map((row) => row.original));
+        console.log(selectedFlatRows.length);
+        if(selectedFlatRows.length < 4){
+            setAllowButton(false);
+        }
+        else{
+            setAllowButton(true);
+        }
     }, [selectedFlatRows]);
       
     return (
         <><Header />
-        <div  className = "full-table-players">
-        <table {...getTableProps()}>
-            <thead>
-                {headerGroups.map((headerGroup) => (
-                    <tr {...headerGroup.getHeaderGroupProps()}>
-                        {headerGroup.headers.map((column) => (
-                            <th {...column.getHeaderProps(column.getSortByToggleProps())}>{column.render('Header')}
-                            </th>
-                        ))}
-                    </tr>
-                ))}
-            </thead>
-            <tbody {...getTableBodyProps()}>
-                {rows.map(row => {
-                    prepareRow(row);
-                    //condition ? result_if_true : result_if_false
-                    return (
-                        <tr {...row.getRowProps()} onClick={() => checked(row)} className={row.isSelected ? 'row-selected' : 'row-not-selected'}>
-                            {row.cells.map((cell) => {
-                                return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>;
-                            })}
-                        </tr>
-                    );
-                })}
-            </tbody>
-        </table>
-        </div>
-        <PostFormAddPlayer/>
         <form onSubmit = {handleSubmit}>
-            <button type = "button" onClick = {handleSubmit}>
-                Click Me
+            <button className = {allowButton ? "button" : "invalid-button"} type = 'submit' disabled={!allowButton} onClick = {handleSubmit}>
+                <span className="text">
+                    Balance Teams
+                </span>
             </button>
         </form>
+        <div className = "table-and-button">
+            <div  className = "full-table-players">
+            <table {...getTableProps()}>
+                <thead>
+                    {headerGroups.map((headerGroup) => (
+                        <tr {...headerGroup.getHeaderGroupProps()}>
+                            {headerGroup.headers.map((column) => (
+                                <th {...column.getHeaderProps(column.getSortByToggleProps())}>{column.render('Header')}
+                                </th>
+                            ))}
+                        </tr>
+                    ))}
+                </thead>
+                <tbody {...getTableBodyProps()}>
+                    {rows.map(row => {
+                        prepareRow(row);
+                        //condition ? result_if_true : result_if_false
+                        return (
+                            <tr {...row.getRowProps()} onClick={() => checked(row)} className={row.isSelected ? 'row-selected' : 'row-not-selected'}>
+                                {row.cells.map((cell) => {
+                                    return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>;
+                                })}
+                            </tr>
+                        );
+                    })}
+                </tbody>
+            </table>
+            
+            </div>
+        </div>
+        
+        
+                
+        <PostFormAddPlayer/>
+        
         </>
     )
 }

@@ -81,6 +81,7 @@ public class PlayerResource {
     @PostMapping("/win/{index}")
     public ResponseEntity<Response> updateWin(@RequestBody @Valid GameResult gameResult, @PathVariable String index) throws Exception {
         log.info("Post Api call: win");
+        log.info(index);
         return ResponseEntity.ok(Response.builder()
                 .timeStamp(now())
                 .data(Map.of("Results of game: ", playerServiceImplementation.gameResults(Integer.parseInt(index), gameResult.getTeamNumb()))) //Remember to change index of 0 to gameResult.getIndex()

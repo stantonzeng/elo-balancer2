@@ -6,8 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="17e756a6-b25f-403c-b493-97b72f47e8bf" name="Changes" comment="Started to implement double swap method. Will need to fix tracker and find position method">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/balancer/elo/model/Team.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/balancer/elo/model/Team.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/balancer/elo/resource/PlayerResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/balancer/elo/resource/PlayerResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/balancer/elo/service/PlayerServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/balancer/elo/service/PlayerServiceImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/model/Team.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/io/balancer/elo/model/Team.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/resource/PlayerResource.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/io/balancer/elo/resource/PlayerResource.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/service/PlayerServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/io/balancer/elo/service/PlayerServiceImplementation.class" afterDir="false" />
     </list>
@@ -205,6 +206,16 @@
       <workItem from="1647314982796" duration="2091000" />
       <workItem from="1647333708980" duration="2320000" />
       <workItem from="1647366485936" duration="4269000" />
+      <workItem from="1647378280406" duration="465000" />
+      <workItem from="1647395690630" duration="2600000" />
+      <workItem from="1647594444973" duration="3158000" />
+      <workItem from="1647627325401" duration="1075000" />
+      <workItem from="1647734357386" duration="2562000" />
+      <workItem from="1647769924900" duration="734000" />
+      <workItem from="1647807212965" duration="2900000" />
+      <workItem from="1647813785716" duration="2355000" />
+      <workItem from="1647828331508" duration="598000" />
+      <workItem from="1647858907022" duration="911000" />
     </task>
     <task id="LOCAL-00001" summary="Started to implement double swap method. Will need to fix tracker and find position method">
       <created>1642595937131</created>

@@ -68,10 +68,26 @@ public class PlayerServiceImplementation implements PlayerService{
         return _playerRepo.findAll(Sort.by(Sort.Direction.ASC, "id"));
     }
 
+    void returnCorrectedVector(Vector<Integer> v, int i, int sz){
+//        log.info(String.format("Sending in i at: %2d", i));
+        if(i == 0){
+            int t = v.get(0);
+            v.set(0, t+1);
+            return;
+        }
+        int offset = abs(i - (v.size()-1));
 
-    //This is used for sorting, if I want to sort the list of players again, I can implement this back
-    //Reason for commenting it out: Sorting doesn't work with limits on players for some reason...
-    Comparator<Player> compareByElo = Comparator.comparing(Player::getElo);
+        if(v.get(i) >= (sz-1)-offset){
+            returnCorrectedVector(v, i-1, sz);
+
+            int t = v.get(i-1);
+            v.set(i, t+1);
+        }
+        else{
+            int t = v.get(i);
+            v.set(i, t+1);
+        }
+    }
 
     /*
     Overall, we have 3 different classes, a Player class, a Team class, and a Teams class (creative, I know...). The Team class
@@ -92,10 +108,7 @@ public class PlayerServiceImplementation implements PlayerService{
         log.info("Starting Balancing Teams");
 
         //p will hold all the players (Up to size 10) taken by listTest()
-        List<Player> p = postedPlayers;
-//        log.info("Sorting");
-//        p.sort(compareByElo);
-//        log.info("Sorting finished");
+        int sizeLimit = postedPlayers.size()/2;
 
         List<Player> t1 = new ArrayList<>();
         List<Player> t2 = new ArrayList<>();
@@ -105,124 +118,70 @@ public class PlayerServiceImplementation implements PlayerService{
         double sumT1 = 0;
         double sumT2 = 0;
 
-        //We can heuristically generate the teams by just doing even-odd separation
-        //Fix this for loop, it is very messy and will produce a lot of errors
-
         log.info("Starting Teams base");
 
-        for(int i = 0; i < p.size(); i++){
-            if(i%2 == 0){
-                t1.add(p.get(i));
-                sumT1 += p.get(i).getElo();
-            }
-            else {
-                t2.add(p.get(i));
-                sumT2 += p.get(i).getElo();
-            }
+        for(Player players : postedPlayers){
+            t1.add(players);
+            sumT1 += players.getElo();
         }
-
-        log.info("Finished Creating original Team");
-
-        //At this point, we have our two even-odd lists that are ordered, we can now get the
-        //values we need
 
         implementedTeams.addToList(new Team(t1, t2, sumT1, sumT2));
 
-        //We will use these 2 values to help with swapping players
-        Player tempSwap = null;
-        Player tempSwap2 = null;
+        for(int counter = 0; counter < sizeLimit; counter++){
+//            log.info(String.format("Counter: %2d", counter));
+            Vector<Integer> pointHolder = new Vector<>();
 
-        int pos2 = 0;
-
-        // |------------------------------------------- SINGLE SWAP START -------------------------------------------|
-        for(int i = 0; i < t1.size(); i++){
-
-            /*
-            For the single swap, we want to find the two values that will minimize the elo differential between the two
-            teams. t1 and t2 ARE NOT OPTIMAL, thus we must check and find the most optimal one.
-            */
-            pos2 = findPosition(t2, sumT1, sumT2, t1.get(i).getElo(), -1);
-            tempSwap = t2.get(pos2);
-
-            //Once we get the lowest elo differential possible we do a swap of the best possible result
-            //tempSumT1 and tempSumT2 holds the elo's for the newly swapped teams.
-            double tempSumT1 = sumT1 - t1.get(i).getElo() + tempSwap.getElo();
-            double tempSumT2 = sumT2 + t1.get(i).getElo() - tempSwap.getElo();
-            List<Player> swappedT1 = new ArrayList<>(t1);
-            List<Player> swappedT2 = new ArrayList<>(t2);
-
-            swappedT2.set(pos2, swappedT1.get(i));
-            swappedT1.set(i, tempSwap);
-
-//            log.info("Switching values at index " + i + " with " + pos2);
-//            log.info("New Set: " + tempT.printAllPlayers());
-
-            //The swap should work... test to make sure
-
-            //Assign these two values to a team and min heap the team using elo diff
-            //Pushing the tempTeam with its elo difference of the teams into the priority queue of Teams
-            implementedTeams.addToList(new Team(swappedT1, swappedT2, tempSumT1, tempSumT2));
-        }
-
-        // |------------------------------------------- SINGLE SWAP END -------------------------------------------|
-
-        // |------------------------------------------- DOUBLE SWAP START-------------------------------------------|
-
-        /*
-        i == first pointer for t1
-        l == first pointer for t2
-        k == second pointer for t1
-        otherPos2 = second pointer for t2
-
-        i != k
-        and l != otherPos2
-
-        Small tid bit explanation for the code below
-
-        The original plan was to just find the t1[i] and t2[pos2] that would minimize the elo differences. Well this mostly works for single swap
-        but now that we can swap two players, we can actually check every single t1[i] and t2[l] and see if t1[k] (which != t1[i]) and t2[otherPos2]
-        can minimize the elo differences. This will help create more legit and dynamic teams.
-
-        This is def O(n^4), but since our size is so small (like 12 players being checked at most), then we really don't care about run time.
-        */
-        for(int i = 0; i < t1.size(); i++){
-            for(int l = 0; l < t2.size(); l++){
-                tempSwap = t2.get(l);
-                for(int k = 0; k < t1.size(); k++){
-                    if(k == i)
-                        continue;
-
-                    /*
-                    Here, similar to the single swap method, we can input the sum elo of both team 1 and team 2, but this time since
-                    we know that we are testing it if we use pointer i and l, then we can use the same function, "findPosition", but send
-                    in the elo's
-
-                     */
-                    int newPosition2 = findPosition(t2, sumT1-t1.get(i).getElo(), sumT2-t2.get(l).getElo(), t1.get(k).getElo(), l);
-                    tempSwap2 = t2.get(newPosition2);
-
-                    double tempSumT1 = sumT1 - t1.get(i).getElo() - t1.get(k).getElo() + tempSwap.getElo() + tempSwap2.getElo();
-                    double tempSumT2 = sumT2 + t1.get(i).getElo() + t1.get(k).getElo() - tempSwap.getElo() - tempSwap2.getElo();
-                    List<Player> swappedT1 = new ArrayList<>(t1);
-                    List<Player> swappedT2 = new ArrayList<>(t2);
-
-                    swappedT2.set(l, swappedT1.get(i));
-                    swappedT2.set(newPosition2, swappedT1.get(k));
-                    swappedT1.set(i, tempSwap);
-                    swappedT1.set(k, tempSwap2);
-
-                    //The swap should work... test to make sure
-
-                    //Assign these two values to a team and min heap the team using elo diff
-                    //Pushing the tempTeam with its elo difference of the teams into the priority queue of Teams
-                    implementedTeams.addToList(new Team(swappedT1, swappedT2, tempSumT1, tempSumT2));
-                }
+            for(int point = 0; point < counter+1; point++){
+                pointHolder.add(point);
             }
+
+            while(pointHolder.get(0) <= (t1.size()- pointHolder.size())){
+//                log.info(String.format("t1.size() - pointholder.size() = %2d - %2d = %2d", t1.size(), pointHolder.size(), t1.size()- pointHolder.size()));
+//                for(int i = 0; i < pointHolder.size(); i++){
+//                    log.info(String.format("i: %2d, val: %2d", i, pointHolder.get(i)));
+//                }
+                List<Player> tempT1 = new ArrayList<>(t1);
+                List<Player> tempT2 = new ArrayList<>(t2);
+
+
+                double tempSumT1 = sumT1;
+                double tempSumT2 = sumT2;
+
+                for (Integer i : pointHolder) {
+
+                    //Give team 2 the player index from team 1
+
+                    Player e = tempT1.get(i);
+                    tempT2.add(e);
+                    tempSumT2 += e.getElo();
+                    tempSumT1 -= e.getElo();
+                }
+                for(int i = pointHolder.size()-1; i >= 0; i--){
+                    //Remove the players from team 1 (we do it backwards to not screw up index positioning)
+                    int g = pointHolder.get(i);
+                    tempT1.remove(g);
+                }
+                tempT1.sort(new Comparator<Player>() {
+                    @Override
+                    public int compare(Player o1, Player o2) {
+                        if(Objects.equals(o1.getId(), o2.getId())) return 0;
+                        return o1.getId() < o2.getId() ? -1 : 1;
+                    }
+                });
+                tempT2.sort(new Comparator<Player>() {
+                    @Override
+                    public int compare(Player o1, Player o2) {
+                        if(Objects.equals(o1.getId(), o2.getId())) return 0;
+                        return o1.getId() < o2.getId() ? -1 : 1;
+                    }
+                });
+
+                implementedTeams.addToList(new Team(tempT1, tempT2, tempSumT1, tempSumT2));
+                returnCorrectedVector(pointHolder, pointHolder.size()-1, postedPlayers.size());
+            }
+
         }
 
-
-
-        // |------------------------------------------- DOUBLE SWAP END-------------------------------------------|
         log.info("Returning Balanced Teams");
         this._teams = implementedTeams;
         return implementedTeams;

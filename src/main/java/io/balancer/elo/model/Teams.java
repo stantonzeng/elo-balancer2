@@ -20,14 +20,21 @@ public class Teams {
                 else return 0;
             }
         });
+        this.st = new HashSet<List<Player>>();
     }
 
     public void addToList(Team t){
 //        log.info("Printing added players " + t.printAllPlayers());
-        this.teams.add((t));
+        if(st.isEmpty() || !st.contains(t.getTeam1()) || !st.contains(t.getTeam2())) {
+            this.teams.add((t));
+            st.add(t.getTeam1());
+            st.add(t.getTeam2());
+        }
     }
 
     private PriorityQueue<Team> teams;
+
+    private Set<List<Player>> st;
 
     private List<Team> sortedTeams = new ArrayList<>();
 

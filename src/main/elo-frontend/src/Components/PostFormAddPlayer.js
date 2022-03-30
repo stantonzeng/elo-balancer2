@@ -1,8 +1,22 @@
 import React, {Component} from "react";
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
 import './button.css';
 
-class PostFormAddPlayer extends Component{
+var userName = "";
+var userID;
+let navigate;
+
+export function PostFormAddPlayer(name){
+  // console.log(name);
+  userName = name.name;
+  // console.log(userName.name + "=");
+  navigate = useNavigate();
+  return(<PostFormAddPlayerTemp />)
+}
+
+class PostFormAddPlayerTemp extends Component{
+  
   
   constructor(props){
     super(props);
@@ -19,25 +33,24 @@ class PostFormAddPlayer extends Component{
       [e.target.name]: e.target.value
     })
   }
-  handleChangeElo = (e) =>{
+  handleChangeElo = (e) =>{ 
     this.setState({
       [e.target.elo]: e.target.value
     })
   }
 
   handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(this.state.name.length);
-    console.log(this.state.elo.length);
-    console.log(typeof this.state.elo)
-    console.log(this.state)
-    if(typeof this.state.elo === "function"){
-      console.log("fuck")
-    }
+    
+    
     axios.post('http://localhost:8080/api/player/add', this.state)
     .then(response => {
       console.log(response.data);
+      userID = response.data.data.Adding.id;
+      console.log(userID);
+      axios.post(`http://localhost:8080/api/user/addPlayer/${userID}`, userName.name + "=")
+      navigate("/players", {state : {name:userName.name}});
     })
+    e.preventDefault();
   }
 
   render(){

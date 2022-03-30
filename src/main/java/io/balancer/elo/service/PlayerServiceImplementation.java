@@ -1,6 +1,7 @@
 package io.balancer.elo.service;
 
 import io.balancer.elo.PlayerRepository;
+import io.balancer.elo.UserRepository;
 import io.balancer.elo.model.Player;
 import io.balancer.elo.model.Team;
 import io.balancer.elo.model.Teams;
@@ -20,6 +21,7 @@ import static java.lang.Math.*;
 @Slf4j
 public class PlayerServiceImplementation implements PlayerService{
     private final PlayerRepository _playerRepo; //final means can only be assigned once
+    private final UserRepository _userRepo;
 
     private Teams _teams;
 
@@ -34,8 +36,9 @@ public class PlayerServiceImplementation implements PlayerService{
         return this._playerRepo.findAll();
     }
 
-    public PlayerServiceImplementation(PlayerRepository playerRepo) {
+    public PlayerServiceImplementation(PlayerRepository playerRepo, UserRepository userRepo) {
         _playerRepo = playerRepo;
+        _userRepo = userRepo;
     }
 
     @Override
@@ -46,7 +49,7 @@ public class PlayerServiceImplementation implements PlayerService{
 
     @Override
     public Player update(Player player) {
-        log.info("Updating player {}'s information", player.getName());
+        log.info("Updating player {}'s information {}", player.getName(), player.getId());
         return _playerRepo.save(player);
     }
 
@@ -66,6 +69,22 @@ public class PlayerServiceImplementation implements PlayerService{
     public List<Player> fullList(){
         log.info("Fetching all players");
         return _playerRepo.findAll(Sort.by(Sort.Direction.ASC, "id"));
+    }
+
+    //TODO: I think we can do this better. Rather than have a string of the user, we can just send in the entire user
+    //This might potentially save time since we do not have to make "find by username" type of deal.
+    @Override
+    public List<Player> fullListUser(String user){
+        log.info("Fetching all players from User List: {}", user);
+
+        List<Player> p = new ArrayList<>();
+        List<Long> t = _userRepo.findByuserName(user).get(0).getListOfPlayers();
+        log.info("size of t {}", t.size());
+        for(Long i : t){
+            p.add(this.get(i));
+            log.info(String.valueOf(i));
+        }
+        return p;
     }
 
     void returnCorrectedVector(Vector<Integer> v, int i, int sz){
@@ -114,7 +133,6 @@ public class PlayerServiceImplementation implements PlayerService{
         List<Player> t2 = new ArrayList<>();
 
         Teams implementedTeams = new Teams();
-
         double sumT1 = 0;
         double sumT2 = 0;
 

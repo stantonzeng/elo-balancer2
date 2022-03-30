@@ -66,6 +66,13 @@ public class PlayerResource {
         return playerServiceImplementation.fullList();
     }
 
+    @GetMapping("/full_list/{user}")
+    public List<Player> getFullListUser(@PathVariable String user){
+        log.info("Get Api call: full_list");
+        return playerServiceImplementation.fullListUser(user);
+    }
+
+
     @GetMapping("/balanceTeams")
     public List<Team> getBalancedTeams(){
         log.info("Get Api call: balanceTeams");
@@ -93,7 +100,7 @@ public class PlayerResource {
 
     @PostMapping("/add") //Post request, adds new players into the system
     public ResponseEntity<Response> addPlayer(@RequestBody @Valid Player player){
-        log.info("Post Api call: add");
+        log.info("Post Api call: add Player");
         return ResponseEntity.ok(Response.builder()
                 .timeStamp(now())
                 .data(Map.of("Adding", playerServiceImplementation.create(player)))

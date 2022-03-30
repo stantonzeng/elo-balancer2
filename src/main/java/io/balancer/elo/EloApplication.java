@@ -1,10 +1,14 @@
 package io.balancer.elo;
 
 import io.balancer.elo.model.Player;
+import io.balancer.elo.model.User;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
+import java.util.*;
 
 @SpringBootApplication
 public class EloApplication{
@@ -14,8 +18,9 @@ public class EloApplication{
 	}
 
 	@Bean
-	CommandLineRunner run(PlayerRepository playerRepo){
+	CommandLineRunner run(PlayerRepository playerRepo, UserRepository userRepo){
 		return args -> {
+
 			playerRepo.save(new Player(null, 1558.0, "bterabtragdsa", 0));
 			playerRepo.save(new Player(null, 1160.0, "My Cat Says Meow", 0));
 			playerRepo.save(new Player(null, 1893.0, "bubblysoju", 0));
@@ -26,6 +31,14 @@ public class EloApplication{
 			playerRepo.save(new Player(null, 1279.0, "Mitsuki Moon",	 0));
 			playerRepo.save(new Player(null, 1554.0, "Ally of Women", 0));
 			playerRepo.save(new Player(null, 1618.0, "Lionblaze219", 0));
+
+			List<Long> t1 = new ArrayList<>();;
+			userRepo.save(new User(null, "test123=", t1));
+			User u = userRepo.findByuserName("test123=").get(0);
+			u.addToList((long) 4);
+			u.addToList((long) 7);
+			u.addToList((long) 9);
+
 		};
 	}
 }

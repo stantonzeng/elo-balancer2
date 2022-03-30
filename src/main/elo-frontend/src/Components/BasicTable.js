@@ -9,6 +9,7 @@ import PostFormAddPlayer from './PostFormAddPlayer';
 import useSWR from 'swr'
 import {useNavigate} from "react-router-dom";
 import { useSortBy } from 'react-table/dist/react-table.development';
+import {useLocation} from "react-router-dom";
 
 var rowIDArray;
 var objectID = {};
@@ -16,12 +17,13 @@ var objectID = {};
 
 //https://getcssscan.com/css-buttons-examples
 export function BasicTable(){
-
+    const {state} = useLocation();
     const fetcher = url => axios.get(url).then(res => res.data)
     const [sleeping, setSleeping] = useState(true)
 
-
-    const { data, error } = useSWR(sleeping ? null : 'http://localhost:8080/api/player/full_list', fetcher, {revalidateOnFocus: false});
+    console.log(state);
+    console.log(`http://localhost:8080/api/user/full_list/${state.name}=`);
+    const { data, error } = useSWR(sleeping ? null : `http://localhost:8080/api/user/full_list/${state.name}=`, fetcher, {revalidateOnFocus: false});
     
     useEffect(() => {
         setTimeout(() => {
@@ -31,6 +33,7 @@ export function BasicTable(){
 
     if (error) console.log("lol");
     if (!data) return <div className = "loading">loading...</div>
+    console.log(data);
 
     return(
         <BasicTableTemp obj = {data}/>
@@ -40,18 +43,22 @@ export function BasicTable(){
 
 export function BasicTableTemp(obj){
     
-    
+    const {state} = useLocation();
+    console.log(state);
     //https://stackoverflow.com/questions/48980380/returning-data-from-axios-api
     //https://stackoverflow.com/questions/61925957/using-an-api-to-create-data-in-a-react-table Use this instead of usememo
 
     const [pProfiles, setPlayerProfiles] = useState([]);
     const [selectedProfiles, setSelectedProfiles] = useState([]);
     const [allowButton, setAllowButton] = useState(false);
+    const [uName, setUName] = useState();
+
     let navigate = useNavigate();
 
     // listData.then(res => {setPlayerProfiles(res.data)});
     useEffect(() => {
         setPlayerProfiles(obj.obj);
+        setUName(state.name);
         if(Object.keys(objectID).length < 4){
             setAllowButton(false);
         }
@@ -93,7 +100,7 @@ export function BasicTableTemp(obj){
     
     useEffect(() => {
         setSelectedProfiles(selectedFlatRows.map((row) => row.original));
-        console.log(selectedFlatRows.length);
+        // console.log(selectedFlatRows.length);
         if(selectedFlatRows.length < 4){
             setAllowButton(false);
         }
@@ -101,9 +108,10 @@ export function BasicTableTemp(obj){
             setAllowButton(true);
         }
     }, [selectedFlatRows]);
-      
+    
     return (
         <><Header />
+        <h1> {uName} </h1>
         <form onSubmit = {handleSubmit}>
             <button className = {allowButton ? "button" : "invalid-button"} type = 'submit' disabled={!allowButton} onClick = {handleSubmit}>
                 <span className="text">
@@ -144,7 +152,7 @@ export function BasicTableTemp(obj){
         
         
                 
-        <PostFormAddPlayer/>
+        <PostFormAddPlayer name = {state}/>
         
         </>
     )

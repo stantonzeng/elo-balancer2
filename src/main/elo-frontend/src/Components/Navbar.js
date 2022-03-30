@@ -5,6 +5,7 @@ import Header from './Header';
 import { BasicTable } from './BasicTable';
 import { ListTeamsBoth } from "./ListTeams";
 import '../App.css';
+import { Login } from "./Login";
 
 const Home = () => (
     <><Header /><div>
@@ -27,6 +28,7 @@ export default function Navbar() {
 
                 <Route exact path='' element = {<Home/>}/>
                 <Route exact path='home' element = {<Home/>}/>
+                <Route exact path='login' element = {<Login/>}/>
                 <Route exact path='players' element = {<BasicTable/>}/>
                 <Route exact path='about' element = {<About/>}/>
                 <Route exact path="listTeams" element = {<ListTeamsBoth/>}/>

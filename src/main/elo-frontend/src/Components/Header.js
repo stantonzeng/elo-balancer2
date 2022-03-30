@@ -7,7 +7,7 @@ const HeaderLink = ({ page, selected }) => {
     const title = page.charAt(0).toUpperCase() + page.slice(1);
     let className = selected ? 'headerlink-no-link ' : '';
     className += 'headerlink-title';
-
+    if(page === "players") page = "login";
     return (
         <Link to={`/${page}`} className={className}>
             {title}

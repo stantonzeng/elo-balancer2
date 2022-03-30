@@ -78,20 +78,21 @@ public class UserResource {
 
         return ResponseEntity.ok(Response.builder()
                 .timeStamp(now())
-                .data(Map.of("Adding", userServiceImplementation.create(new User(null, user, new ArrayList<>()))))
+                .data(Map.of("Adding", userServiceImplementation.create(new User(null, user, ""))))
                 .message("User added")
                 .status(CREATED)
                 .statusCode(CREATED.value())
                 .build());
     }
 
+    //TODO: add the player correctly
     @PostMapping("/addPlayer/{p}")
     public ResponseEntity<Response> addUser(@RequestBody @Valid String user, @PathVariable String p) {
         log.info("Post Api call: add player {} to user list", p);
 
         return ResponseEntity.ok(Response.builder()
                 .timeStamp(now())
-                .data(Map.of("Adding", userServiceImplementation.get(user).addToList(Long.valueOf(p))))
+                .data(Map.of("Adding", userServiceImplementation.get(user).addToList(p)))
                 .message("Player added")
                 .status(CREATED)
                 .statusCode(CREATED.value())

@@ -18,6 +18,8 @@ public interface PlayerService {
 
     List<Player> fullList();
 
+    List<Player> readString(String listP);
+
     List<Player> fullListUser(String user);
 
     Teams balanceTeams();

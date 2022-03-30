@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Service
 @Transactional
@@ -58,15 +57,34 @@ public class UserServiceImplementation implements UserService{
     }
 
     @Override
+    public List<Long> readString(String listP){
+        List<Long> answ = new ArrayList<>();
+        int start = 0;
+        int end = 0;
+
+        //012345678
+        //,9,12,123
+        for(int i = 1; i < listP.length(); i++){
+            if(listP.charAt(i) == ','){
+                start = end;
+                end = i;
+                answ.add(Long.valueOf(listP.substring(start+1, end)));
+            }
+        }
+        answ.add(Long.valueOf(listP.substring(end+1)));
+        return answ;
+    }
+
+    @Override
     public List<Player> fullListUser(String user){
         log.info("Fetching all players from User List: {}", user);
 
         List<Player> p = new ArrayList<>();
-        List<Long> t = _userRepo.findByuserName(user).get(0).getListOfPlayers();
+        String t = _userRepo.findByuserName(user).get(0).getListOfPlayers();
         log.info(_userRepo.findByuserName(user).get(0).getUserName());
-        log.info("size of t {}", t.size());
-        for(Long i : t){
-            p.add(_playerServiceImplementation.get(i));
+        log.info("size of t {}", t.length());
+        List<Long> test = readString(t);
+        for(Long i: test){
             log.info(String.valueOf(i));
         }
         return p;

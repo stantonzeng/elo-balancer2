@@ -71,20 +71,32 @@ public class PlayerServiceImplementation implements PlayerService{
         return _playerRepo.findAll(Sort.by(Sort.Direction.ASC, "id"));
     }
 
+    @Override
+    public List<Player> readString(String listP){
+        log.info(listP);
+        List<Player> answ = new ArrayList<>();
+        int start = 0;
+        int end = 0;
+
+        //012345678
+        //,9,12,123
+        for(int i = 1; i < listP.length(); i++){
+            if(listP.charAt(i) == ','){
+                start = end;
+                end = i;
+                answ.add(get(Long.valueOf(listP.substring(start+1, end))));
+            }
+        }
+        answ.add(get(Long.valueOf(listP.substring(end+1))));
+        return answ;
+    }
     //TODO: I think we can do this better. Rather than have a string of the user, we can just send in the entire user
     //This might potentially save time since we do not have to make "find by username" type of deal.
     @Override
     public List<Player> fullListUser(String user){
         log.info("Fetching all players from User List: {}", user);
-
-        List<Player> p = new ArrayList<>();
-        List<Long> t = _userRepo.findByuserName(user).get(0).getListOfPlayers();
-        log.info("size of t {}", t.size());
-        for(Long i : t){
-            p.add(this.get(i));
-            log.info(String.valueOf(i));
-        }
-        return p;
+        String t = _userRepo.findByuserName(user).get(0).getListOfPlayers();
+        return readString(t);
     }
 
     void returnCorrectedVector(Vector<Integer> v, int i, int sz){

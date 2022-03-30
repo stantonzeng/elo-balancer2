@@ -22,8 +22,8 @@ export function BasicTable(){
     const [sleeping, setSleeping] = useState(true)
 
     console.log(state);
-    console.log(`http://localhost:8080/api/user/full_list/${state.name}=`);
-    const { data, error } = useSWR(sleeping ? null : `http://localhost:8080/api/user/full_list/${state.name}=`, fetcher, {revalidateOnFocus: false});
+    console.log(`http://localhost:8080/api/player/full_list/${state.name}=`);
+    const { data, error } = useSWR(sleeping ? null : `http://localhost:8080/api/player/full_list/${state.name}=`, fetcher, {revalidateOnFocus: false});
     
     useEffect(() => {
         setTimeout(() => {

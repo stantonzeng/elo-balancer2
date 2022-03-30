@@ -32,12 +32,12 @@ public class EloApplication{
 			playerRepo.save(new Player(null, 1554.0, "Ally of Women", 0));
 			playerRepo.save(new Player(null, 1618.0, "Lionblaze219", 0));
 
-			List<Long> t1 = new ArrayList<>();;
-			userRepo.save(new User(null, "test123=", t1));
+			userRepo.save(new User(null, "test123=", ""));
 			User u = userRepo.findByuserName("test123=").get(0);
-			u.addToList((long) 4);
-			u.addToList((long) 7);
-			u.addToList((long) 9);
+			u.addToList(String.valueOf(4));
+			u.addToList(String.valueOf(7));
+			u.addToList(String.valueOf(9));
+			userRepo.save(u);
 
 		};
 	}

@@ -5,9 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Entity //Turns our class into an entity so we can map it to db
 @Data
@@ -25,16 +23,14 @@ public class User {
     @Getter(AccessLevel.NONE)
     private String userName;
 
-    @ElementCollection
-    @CollectionTable(name = "user_list", joinColumns = @JoinColumn(name = "user_id"))
-    @OrderColumn
-    private List<Long> listOfPlayers;
 
-    public String addToList(Long val){
-        List<Long> t = new ArrayList<>();
-        this.listOfPlayers.add(val);
+    private String listOfPlayers;
+
+    public String addToList(String val){
+        this.listOfPlayers = this.listOfPlayers + "," + val;
+        log.info(this.listOfPlayers);
         log.info("Adding player {} to user {}", val, userName);
-        return String.valueOf(val);
+        return val;
     }
 
     public String getUserName() {

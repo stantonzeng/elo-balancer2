@@ -94,6 +94,9 @@ public class PlayerServiceImplementation implements PlayerService{
     public List<Player> fullListUser(String user){
         log.info("Fetching all players from User List: {}", user);
         String t = _userRepo.findByuserName(user).get(0).getListOfPlayers();
+        if(t.length() == 0){
+            return new ArrayList<>();
+        }
         return readString(t);
     }
 

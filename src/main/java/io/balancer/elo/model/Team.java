@@ -92,9 +92,9 @@ public class Team{
         for (Player value : team1) {
             value.incrementStreak();
             log.info(String.valueOf(value.getStreakBonus()));
-            log.info(String.valueOf((1.0 - win - calculateExpectedValueT1())*-1));
+            log.info(String.valueOf((1.0 - win - calculateExpectedValueT1())));
 
-            BigDecimal temp = BigDecimal.valueOf(kVal(value.getElo()) * ((1 - win - calculateExpectedValueT1())*-1)).setScale(2, RoundingMode.HALF_UP);
+            BigDecimal temp = BigDecimal.valueOf(kVal(value.getElo()) * ((1 - win - calculateExpectedValueT1()))).setScale(2, RoundingMode.HALF_UP);
             BigDecimal bd1 = BigDecimal.valueOf(value.getStreakBonus() * temp.doubleValue()).setScale(2, RoundingMode.HALF_UP);
             BigDecimal val1 = BigDecimal.valueOf(value.getElo() + bd1.doubleValue()).setScale(2, RoundingMode.HALF_UP);
 
@@ -109,9 +109,9 @@ public class Team{
         for (Player player : team2) {
             player.decrementStreak();
             log.info(String.valueOf(player.getStreakBonus()));
-            log.info(String.valueOf((win - calculateExpectedValueT2())*-1));
+            log.info(String.valueOf((win - calculateExpectedValueT2())));
 
-            BigDecimal temp = BigDecimal.valueOf(kVal(player.getElo()) * ((win - calculateExpectedValueT2())*-1)).setScale(2, RoundingMode.HALF_UP);
+            BigDecimal temp = BigDecimal.valueOf(kVal(player.getElo()) * ((win - calculateExpectedValueT2()))).setScale(2, RoundingMode.HALF_UP);
             BigDecimal bd2 = BigDecimal.valueOf(player.getStreakBonus() * temp.doubleValue()).setScale(2, RoundingMode.HALF_UP);
             BigDecimal val2 = BigDecimal.valueOf(player.getElo() + bd2.doubleValue()).setScale(2, RoundingMode.HALF_UP);
 

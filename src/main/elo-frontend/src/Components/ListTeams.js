@@ -40,11 +40,11 @@ export function ListTeamsBoth () {
             </div>
             <div className = "elo-diff">
                 <p>Elo Difference: {newData[0].eloDifference}</p>
-                <PostResults index = {0}/>
             </div>
             <div className="right-team-2">
                 <ListTeams2 props={newData[0]} />
             </div>
+            <PostResults index = {0}/>
         </div>
         <div className= "container">
             <div className = "team-number">
@@ -55,11 +55,11 @@ export function ListTeamsBoth () {
             </div>
             <div className = "elo-diff">
                 <p>Elo Difference: {newData[1].eloDifference}</p>
-                <PostResults index = {1}/>
             </div>
             <div className="right-team-2">
                 <ListTeams2 props={newData[1]} />
             </div>
+            <PostResults index = {1}/>
         </div>
         <div className= "container">
             <div className = "team-number">
@@ -70,11 +70,11 @@ export function ListTeamsBoth () {
             </div>
             <div className = "elo-diff">
                 <p>Elo Difference: {newData[2].eloDifference}</p>
-                <PostResults index = {2}/>
             </div>
             <div className="right-team-2">
                 <ListTeams2 props={newData[2]} />
             </div>
+            <PostResults index = {2}/>
         </div>
         <div className= "container">
             <div className = "team-number">
@@ -85,11 +85,11 @@ export function ListTeamsBoth () {
             </div>
             <div className = "elo-diff">
                 <p>Elo Difference: {newData[3].eloDifference}</p>
-                <PostResults index = {3}/>
             </div>
             <div className="right-team-2">
                 <ListTeams2 props={newData[3]} />
             </div>
+            <PostResults index = {3}/>
         </div>
         <div className= "container-special">
             <div className = "team-number">
@@ -100,11 +100,11 @@ export function ListTeamsBoth () {
             </div>
             <div className = "elo-diff">
                 <p>Elo Difference: {newData[4].eloDifference}</p>
-                <PostResults index = {4}/>
             </div>
             <div className="right-team-2">
                 <ListTeams2 props={newData[4]} />
             </div>
+            <PostResults index = {4}/>
         </div>
         </>
     )
@@ -113,9 +113,12 @@ export function ListTeamsBoth () {
 export function ListTeams1 (props){
     
     const [pProfiles, setPlayerProfiles] = useState([]);
+    const [listTitle, setListTitle] = useState("");
+    console.log(props);
 
     useEffect(() => {
         setPlayerProfiles(props.props.team1);
+        setListTitle("Team 1 (" + props.props.sumEloT1 + ")");
     }, [props]);
     
     
@@ -128,6 +131,9 @@ export function ListTeams1 (props){
     })
 
     const{ getTableProps, getTableBodyProps, headerGroups, rows, prepareRow} = tableInstance
+
+    console.log(headerGroups);
+    headerGroups[0].headers[0].Header = listTitle;
     
     return (
         <table {...getTableProps()}>
@@ -158,9 +164,11 @@ export function ListTeams1 (props){
 
 export function ListTeams2 (props) {
     const [pProfiles_2, setPlayerProfiles_2] = useState([]);
+    const [listTitle, setListTitle] = useState("");
     
     useEffect(() => {
         setPlayerProfiles_2(props.props.team2)
+        setListTitle("Team 2 (" + props.props.sumEloT2 + ")");
     }, [props]);
 
 
@@ -173,6 +181,7 @@ export function ListTeams2 (props) {
 
     const{ getTableProps, getTableBodyProps, headerGroups, rows, prepareRow} = tableInstance_2
     
+    headerGroups[0].headers[0].Header = listTitle;
     return (
         <table {...getTableProps()}>
             <thead>

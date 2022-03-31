@@ -40,14 +40,14 @@ class PostFormAddPlayerTemp extends Component{
   }
 
   handleSubmit = (e) => {
+    e.preventDefault();
     
     axios.post('http://localhost:8080/api/player/add', this.state)
     .then(response => {
       userID = response.data.data.Adding.id;
       axios.post(`http://localhost:8080/api/user/addPlayer/${userID}`, userName.name + "=")
-      navigate("/players", {state : {name:userName.name}});
+      
     })
-    e.preventDefault();
   }
 
   render(){

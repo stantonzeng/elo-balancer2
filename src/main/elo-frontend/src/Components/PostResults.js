@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import Select from 'react-select';
 import axios from "axios";
 import './win.css';
-import { useNavigate } from 'react-router';
+import { useNavigate, useLocation} from 'react-router';
 
 const options = [
   {value: 0, label: 'Team 1' },
@@ -10,6 +10,7 @@ const options = [
 ];
 
 export const PostResults = (index) => {
+  const {state} = useLocation();
   const [teamNumb, setTeamNumb] = useState();
   const [allowButton, setAllowButton] = useState(false);
 
@@ -18,7 +19,8 @@ export const PostResults = (index) => {
   const handleSubmit = (e) =>{
     console.log(`http://localhost:8080/api/player/win/${index.index}`);
     axios.post(`http://localhost:8080/api/player/win/${index.index}`, teamNumb);
-    navigate("/players");
+    let newv = state.name;
+    navigate("/players", {state : {name:newv}});
   }
 
   const handleChange = (value) =>{

@@ -17,6 +17,7 @@ var objectID = {};
 
 //https://getcssscan.com/css-buttons-examples
 export function BasicTable(){
+    console.log(useLocation());
     const {state} = useLocation();
     const fetcher = url => axios.get(url).then(res => res.data)
     const [sleeping, setSleeping] = useState(true)
@@ -44,7 +45,6 @@ export function BasicTable(){
 export function BasicTableTemp(obj){
     
     const {state} = useLocation();
-    console.log(state);
     //https://stackoverflow.com/questions/48980380/returning-data-from-axios-api
     //https://stackoverflow.com/questions/61925957/using-an-api-to-create-data-in-a-react-table Use this instead of usememo
 
@@ -65,7 +65,7 @@ export function BasicTableTemp(obj){
         else{
             setAllowButton(true);
         }
-    }, [obj]);
+    }, [obj, state.name]);
     
     
     const columns = useMemo(() => COLUMNS, []);
@@ -86,7 +86,8 @@ export function BasicTableTemp(obj){
         console.log(objectID);
         axios.post('http://localhost:8080/api/player/selectedPlayers', selectedProfiles);
         // window.location = "/listTeams";
-        navigate("/listTeams")
+        let newv = uName;
+        navigate("/listTeams", {state : {name:newv}})
     }
 
     const{ getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, selectedFlatRows} = 
@@ -153,6 +154,7 @@ export function BasicTableTemp(obj){
         
                 
         <PostFormAddPlayer name = {state}/>
+        <p> (Refresh the page after adding a player)</p>
         
         </>
     )

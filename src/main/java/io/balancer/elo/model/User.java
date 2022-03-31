@@ -28,8 +28,6 @@ public class User {
 
     public String addToList(String val){
         this.listOfPlayers = this.listOfPlayers + "," + val;
-        log.info(this.listOfPlayers);
-        log.info("Adding player {} to user {}", val, userName);
         return val;
     }
 

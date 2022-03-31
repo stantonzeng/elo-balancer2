@@ -15,7 +15,4 @@ public interface UserService {
 
     List<User> fullList();
 
-    List<Long> readString(String listP);
-
-    List<Player> fullListUser(String user);
 }

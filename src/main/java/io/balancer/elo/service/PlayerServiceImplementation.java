@@ -78,8 +78,6 @@ public class PlayerServiceImplementation implements PlayerService{
         int start = 0;
         int end = 0;
 
-        //012345678
-        //,9,12,123
         for(int i = 1; i < listP.length(); i++){
             if(listP.charAt(i) == ','){
                 start = end;

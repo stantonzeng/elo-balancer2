@@ -10,14 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 
 import static java.time.LocalDateTime.now;
 import static org.springframework.http.HttpStatus.CREATED;
-import static org.springframework.http.HttpStatus.OK;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -33,17 +29,7 @@ public class UserResource {
     @GetMapping("/get/{userName}")
     public User getUser(@PathVariable("userName") String userName){
         log.info("Get Api call: get/{}", userName);
-        User u = userServiceImplementation.get(userName);
-//        if(u == null) return new User((long) -1, "null", new ArrayList<>());
-        return u;
-
-//        return ResponseEntity.ok(Response.builder()
-//                .timeStamp(now())
-//                .data(Map.of("User", userServiceImplementation.get(userName)))
-//                .message("User retrieved")
-//                .status(OK)
-//                .statusCode(OK.value())
-//                .build());
+        return userServiceImplementation.get(userName);
     }
 
     @GetMapping("/check/{userName}")
@@ -51,12 +37,6 @@ public class UserResource {
         log.info("Get Api call: check/{}", userName);
         User u = userServiceImplementation.get(userName);
         return u != null;
-    }
-
-    @GetMapping("/full_list/{user}")
-    public List<Player> getFullListUser(@PathVariable String user){
-        log.info("Get Api call: full_list");
-        return userServiceImplementation.fullListUser(user);
     }
 
     @PostMapping("/add")
@@ -85,14 +65,16 @@ public class UserResource {
                 .build());
     }
 
-    //TODO: add the player correctly
     @PostMapping("/addPlayer/{p}")
     public ResponseEntity<Response> addUser(@RequestBody @Valid String user, @PathVariable String p) {
         log.info("Post Api call: add player {} to user list", p);
+        User u = userServiceImplementation.get(user);
+        u.addToList(p);
+        userServiceImplementation.update(u);
 
         return ResponseEntity.ok(Response.builder()
                 .timeStamp(now())
-                .data(Map.of("Adding", userServiceImplementation.get(user).addToList(p)))
+                .data(Map.of("Adding", p))
                 .message("Player added")
                 .status(CREATED)
                 .statusCode(CREATED.value())

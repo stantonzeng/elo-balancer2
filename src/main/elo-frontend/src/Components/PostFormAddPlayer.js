@@ -1,17 +1,12 @@
 import React, {Component} from "react";
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
 import './button.css';
 
 var userName = "";
 var userID;
-let navigate;
 
 export function PostFormAddPlayer(name){
-  // console.log(name);
   userName = name.name;
-  // console.log(userName.name + "=");
-  navigate = useNavigate();
   return(<PostFormAddPlayerTemp />)
 }
 

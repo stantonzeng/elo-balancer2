@@ -18,7 +18,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO) //HOW we generate our Id's for players
     private Long id;
 
-    @Column(unique = true) //All name values have to be unique, maps the value name to a database column
+    @Column(unique = true)
     @NotEmpty(message = "Name cannot be empty")
     @Getter(AccessLevel.NONE)
     private String userName;

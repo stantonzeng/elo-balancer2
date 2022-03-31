@@ -17,13 +17,11 @@ var objectID = {};
 
 //https://getcssscan.com/css-buttons-examples
 export function BasicTable(){
-    console.log(useLocation());
+    // console.log(useLocation());
     const {state} = useLocation();
     const fetcher = url => axios.get(url).then(res => res.data)
     const [sleeping, setSleeping] = useState(true)
 
-    console.log(state);
-    console.log(`http://localhost:8080/api/player/full_list/${state.name}=`);
     const { data, error } = useSWR(sleeping ? null : `http://localhost:8080/api/player/full_list/${state.name}=`, fetcher, {revalidateOnFocus: false});
     
     useEffect(() => {
@@ -34,7 +32,6 @@ export function BasicTable(){
 
     if (error) console.log("lol");
     if (!data) return <div className = "loading">loading...</div>
-    console.log(data);
 
     return(
         <BasicTableTemp obj = {data}/>
@@ -78,14 +75,13 @@ export function BasicTableTemp(obj){
     const handleSubmit = (e) => {
         // e.preventDefault();
 
-        console.log(selectedProfiles);
+        // console.log(selectedProfiles);
         rowIDArray = selectedProfiles.map(d => d.id);
-        console.log(rowIDArray);
+        // console.log(rowIDArray);
         objectID = {};
         rowIDArray.forEach(key => objectID[key-1] = true);
-        console.log(objectID);
+        // console.log(objectID);
         axios.post('http://localhost:8080/api/player/selectedPlayers', selectedProfiles);
-        // window.location = "/listTeams";
         let newv = uName;
         navigate("/listTeams", {state : {name:newv}})
     }
@@ -101,7 +97,6 @@ export function BasicTableTemp(obj){
     
     useEffect(() => {
         setSelectedProfiles(selectedFlatRows.map((row) => row.original));
-        // console.log(selectedFlatRows.length);
         if(selectedFlatRows.length < 4){
             setAllowButton(false);
         }

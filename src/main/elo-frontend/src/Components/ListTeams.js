@@ -114,7 +114,6 @@ export function ListTeams1 (props){
     
     const [pProfiles, setPlayerProfiles] = useState([]);
     const [listTitle, setListTitle] = useState("");
-    console.log(props);
 
     useEffect(() => {
         setPlayerProfiles(props.props.team1);
@@ -132,7 +131,6 @@ export function ListTeams1 (props){
 
     const{ getTableProps, getTableBodyProps, headerGroups, rows, prepareRow} = tableInstance
 
-    console.log(headerGroups);
     headerGroups[0].headers[0].Header = listTitle;
     
     return (

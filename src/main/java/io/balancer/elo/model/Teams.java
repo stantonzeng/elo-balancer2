@@ -15,9 +15,7 @@ public class Teams {
         this.teams = new PriorityQueue<Team>(10, new Comparator<Team>() {
             @Override
             public int compare(Team o1, Team o2) {
-                if(o1.getEloDifference() > o2.getEloDifference()) return 1;
-                else if (o1.getEloDifference() < o2.getEloDifference()) return -1;
-                else return 0;
+                return Double.compare(o1.getEloDifference(), o2.getEloDifference());
             }
         });
         this.st = new HashSet<List<Player>>();

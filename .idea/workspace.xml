@@ -5,24 +5,43 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="17e756a6-b25f-403c-b493-97b72f47e8bf" name="Changes" comment="Started to implement double swap method. Will need to fix tracker and find position method">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/balancer/elo/EloApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/balancer/elo/PlayerRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/balancer/elo/UserRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/balancer/elo/model/GameResult.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/balancer/elo/model/Player.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/balancer/elo/model/Response.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/balancer/elo/model/Team.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/balancer/elo/model/Teams.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/balancer/elo/model/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/balancer/elo/resource/PlayerResource.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/balancer/elo/resource/UserResource.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/balancer/elo/service/PlayerService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/balancer/elo/service/PlayerServiceImplementation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/balancer/elo/service/UserService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/balancer/elo/service/UserServiceImplementation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/io/balancer/elo/EloApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/balancer/elo/EloApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/elo-backend/app/EloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/elo-backend/backend/EloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/elo-backend/model/GameResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/elo-backend/backend/model/GameResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/elo-backend/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/elo-backend/backend/model/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/elo-backend/model/Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/elo-backend/backend/model/Response.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/elo-backend/model/Team.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/elo-backend/backend/model/Team.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/elo-backend/model/Teams.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/elo-backend/backend/model/Teams.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/elo-backend/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/elo-backend/backend/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/elo-backend/repository/PlayerRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/elo-backend/backend/PlayerRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/elo-backend/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/elo-backend/backend/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/elo-backend/resource/PlayerResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/elo-backend/backend/resource/PlayerResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/elo-backend/resource/UserResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/elo-backend/backend/resource/UserResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/elo-backend/service/PlayerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/elo-backend/backend/service/PlayerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/elo-backend/service/PlayerServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/elo-backend/backend/service/PlayerServiceImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/elo-backend/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/elo-backend/backend/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/elo-backend/service/UserServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/elo-backend/backend/service/UserServiceImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/EloApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/PlayerRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/UserRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/model/GameResult.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/model/Player.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/model/Response$ResponseBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/model/Response$ResponseBuilderImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/model/Response.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/model/Team.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/model/Teams$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/model/Teams.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/model/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/resource/PlayerResource.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/resource/UserResource.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/service/PlayerService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/service/PlayerServiceImplementation$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/service/PlayerServiceImplementation$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/service/PlayerServiceImplementation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/service/UserService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/service/UserServiceImplementation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/io/balancer/elo/EloApplicationTests.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,6 +124,11 @@
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.DirectoryMappings" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="configurationTypes">
       <set>
@@ -115,7 +139,7 @@
   <component name="RunManager" selected="Spring Boot.EloApplication (1)">
     <configuration name="EloApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="elo-balancer2" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="app.EloApplication" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="backend.EloApplication" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -268,6 +292,7 @@
       <workItem from="1648934396388" duration="3000" />
       <workItem from="1648934442737" duration="1100000" />
       <workItem from="1649011865667" duration="1813000" />
+      <workItem from="1649062899411" duration="2207000" />
     </task>
     <task id="LOCAL-00001" summary="Started to implement double swap method. Will need to fix tracker and find position method">
       <created>1642595937131</created>

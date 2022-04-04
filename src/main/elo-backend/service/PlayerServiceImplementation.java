@@ -1,10 +1,10 @@
-package io.balancer.elo.service;
+package service;
 
-import io.balancer.elo.PlayerRepository;
-import io.balancer.elo.UserRepository;
-import io.balancer.elo.model.Player;
-import io.balancer.elo.model.Team;
-import io.balancer.elo.model.Teams;
+import repository.PlayerRepository;
+import repository.UserRepository;
+import model.Player;
+import model.Team;
+import model.Teams;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;

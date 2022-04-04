@@ -1,9 +1,9 @@
-package io.balancer.elo.service;
+package service;
 
-import io.balancer.elo.model.Player;
-import io.balancer.elo.model.Team;
-import io.balancer.elo.model.Teams;
-import io.balancer.elo.model.User;
+import model.Player;
+import model.Team;
+import model.Teams;
+import model.User;
 
 import java.util.List;
 

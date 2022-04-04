@@ -1,7 +1,6 @@
-package io.balancer.elo.service;
+package service;
 
-import io.balancer.elo.model.Player;
-import io.balancer.elo.model.User;
+import model.User;
 
 import java.util.List;
 

@@ -1,14 +1,14 @@
-package io.balancer.elo;
+package app;
 
-import io.balancer.elo.model.Player;
-import io.balancer.elo.model.User;
-import org.jetbrains.annotations.NotNull;
+import model.Player;
+import model.User;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
-import java.util.*;
+import repository.PlayerRepository;
+import repository.UserRepository;
 
 @SpringBootApplication
 public class EloApplication{

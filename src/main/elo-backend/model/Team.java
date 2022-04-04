@@ -1,6 +1,5 @@
-package io.balancer.elo.model;
+package model;
 
-import io.balancer.elo.service.PlayerServiceImplementation;
 import lombok.Data;
 
 import java.util.ArrayList;

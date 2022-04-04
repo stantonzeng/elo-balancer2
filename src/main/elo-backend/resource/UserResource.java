@@ -1,10 +1,8 @@
-package io.balancer.elo.resource;
+package resource;
 
-
-import io.balancer.elo.model.Player;
-import io.balancer.elo.model.Response;
-import io.balancer.elo.model.User;
-import io.balancer.elo.service.UserServiceImplementation;
+import model.Response;
+import model.User;
+import service.UserServiceImplementation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,11 +1,10 @@
-package io.balancer.elo.model;
+package model;
 
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.util.List;
 
 @Entity //Turns our class into an entity so we can map it to db
 @Data

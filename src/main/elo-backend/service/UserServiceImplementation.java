@@ -1,14 +1,12 @@
-package io.balancer.elo.service;
+package service;
 
-import io.balancer.elo.UserRepository;
-import io.balancer.elo.model.Player;
-import io.balancer.elo.model.User;
+import model.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import repository.UserRepository;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

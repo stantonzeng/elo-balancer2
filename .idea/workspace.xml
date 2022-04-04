@@ -5,12 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="17e756a6-b25f-403c-b493-97b72f47e8bf" name="Changes" comment="Started to implement double swap method. Will need to fix tracker and find position method">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/balancer/elo/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/balancer/elo/model/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/balancer/elo/model/Player1.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/balancer/elo/model/Player2.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/balancer/elo/model/Teams.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/balancer/elo/model/Teams.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/balancer/elo/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/balancer/elo/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/balancer/elo/EloApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/balancer/elo/PlayerRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/balancer/elo/UserRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/balancer/elo/model/GameResult.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/balancer/elo/model/Player.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/balancer/elo/model/Response.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/balancer/elo/model/Team.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/balancer/elo/model/Teams.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/balancer/elo/model/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/balancer/elo/resource/PlayerResource.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/balancer/elo/resource/UserResource.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/balancer/elo/service/PlayerService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/balancer/elo/service/PlayerServiceImplementation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/balancer/elo/service/UserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/balancer/elo/service/UserServiceImplementation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/io/balancer/elo/EloApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/balancer/elo/EloApplicationTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,6 +91,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -87,6 +100,9 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.DirectoryMappings" />
   </component>
   <component name="RunDashboard">
@@ -96,22 +112,27 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.EloApplication">
+  <component name="RunManager" selected="Spring Boot.EloApplication (1)">
     <configuration name="EloApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="elo-balancer2" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="io.balancer.elo.EloApplication" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="app.EloApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="EloApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="elo-balancer2" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="io.balancer.elo.EloApplication" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="EloApplication.java" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Spring Boot.EloApplication" />
+      <item itemvalue="Spring Boot.EloApplication (1)" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -240,7 +261,13 @@
       <workItem from="1648675645638" duration="6474000" />
       <workItem from="1648689918141" duration="2624000" />
       <workItem from="1648712235757" duration="4041000" />
-      <workItem from="1648763408298" duration="3743000" />
+      <workItem from="1648763408298" duration="3831000" />
+      <workItem from="1648885385257" duration="670000" />
+      <workItem from="1648886077687" duration="355000" />
+      <workItem from="1648933340997" duration="778000" />
+      <workItem from="1648934396388" duration="3000" />
+      <workItem from="1648934442737" duration="1100000" />
+      <workItem from="1649011865667" duration="1813000" />
     </task>
     <task id="LOCAL-00001" summary="Started to implement double swap method. Will need to fix tracker and find position method">
       <created>1642595937131</created>

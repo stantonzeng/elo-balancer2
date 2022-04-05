@@ -6,42 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="17e756a6-b25f-403c-b493-97b72f47e8bf" name="Changes" comment="Started to implement double swap method. Will need to fix tracker and find position method">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/elo-backend/app/EloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/elo-backend/backend/EloApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/elo-backend/model/GameResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/elo-backend/backend/model/GameResult.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/elo-backend/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/elo-backend/backend/model/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/elo-backend/model/Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/elo-backend/backend/model/Response.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/elo-backend/model/Team.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/elo-backend/backend/model/Team.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/elo-backend/model/Teams.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/elo-backend/backend/model/Teams.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/elo-backend/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/elo-backend/backend/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/elo-backend/repository/PlayerRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/elo-backend/backend/PlayerRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/elo-backend/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/elo-backend/backend/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/elo-backend/resource/PlayerResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/elo-backend/backend/resource/PlayerResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/elo-backend/resource/UserResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/elo-backend/backend/resource/UserResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/elo-backend/service/PlayerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/elo-backend/backend/service/PlayerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/elo-backend/service/PlayerServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/elo-backend/backend/service/PlayerServiceImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/elo-backend/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/elo-backend/backend/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/elo-backend/service/UserServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/elo-backend/backend/service/UserServiceImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/EloApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/PlayerRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/UserRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/model/GameResult.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/model/Player.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/model/Response$ResponseBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/model/Response$ResponseBuilderImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/model/Response.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/model/Team.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/model/Teams$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/model/Teams.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/model/User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/resource/PlayerResource.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/resource/UserResource.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/service/PlayerService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/service/PlayerServiceImplementation$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/service/PlayerServiceImplementation$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/service/PlayerServiceImplementation.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/service/UserService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/io/balancer/elo/service/UserServiceImplementation.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/io/balancer/elo/EloApplicationTests.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,6 +69,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="postgresql" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
@@ -122,7 +88,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.DirectoryMappings" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -292,7 +258,9 @@
       <workItem from="1648934396388" duration="3000" />
       <workItem from="1648934442737" duration="1100000" />
       <workItem from="1649011865667" duration="1813000" />
-      <workItem from="1649062899411" duration="2207000" />
+      <workItem from="1649062899411" duration="4774000" />
+      <workItem from="1649112617090" duration="5953000" />
+      <workItem from="1649155906062" duration="1342000" />
     </task>
     <task id="LOCAL-00001" summary="Started to implement double swap method. Will need to fix tracker and find position method">
       <created>1642595937131</created>
@@ -321,5 +289,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Started to implement double swap method. Will need to fix tracker and find position method" />
     <option name="LAST_COMMIT_MESSAGE" value="Started to implement double swap method. Will need to fix tracker and find position method" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

@@ -4,12 +4,25 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data //Creates the getters and setters
 @NoArgsConstructor
 @AllArgsConstructor
 public class GameResult {
 
 //    private int index;
     private int teamNumb;
+
+    /**
+     * @return the teamNumb
+     */
+    public int getTeamNumb() {
+        return teamNumb;
+    }
+
+    /**
+     * @param teamNumb the teamNumb to set
+     */
+    public void setTeamNumb(int teamNumb) {
+        this.teamNumb = teamNumb;
+    }
 
 }

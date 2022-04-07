@@ -29,10 +29,10 @@ public class PlayerServiceImplementation implements PlayerService{
 
     public List<Player> setPostedPlayers(List<Player> _postedPlayers) {
         this.postedPlayers = _postedPlayers;
-        log.info("Setting the players in");
-        for (Player postedPlayer : _postedPlayers) {
-            log.info("Adding Player: {}", postedPlayer.getName());
-        }
+        // log.info("Setting the players in");
+        // for (Player postedPlayer : _postedPlayers) {
+        //     log.info("Adding Player: {}", postedPlayer.getName());
+        // }
         return this._playerRepo.findAll();
     }
 
@@ -43,37 +43,37 @@ public class PlayerServiceImplementation implements PlayerService{
 
     @Override
     public Player create(Player player) {
-        log.info("Saving new player: {}", player.getName());
+        // log.info("Saving new player: {}", player.getName());
         return this._playerRepo.save(player);
     }
 
     @Override
     public Player update(Player player) {
-        log.info("Updating player {}'s information {}", player.getName(), player.getId());
+        // log.info("Updating player {}'s information {}", player.getName(), player.getId());
         return _playerRepo.save(player);
     }
 
     @Override
     public Player get(Long id) {
-        log.info("Fetching player {}", id);
+        // log.info("Fetching player {}", id);
         return _playerRepo.findById(id).get();
     }
 
     @Override
     public List<Player> list(int start, int limit) {
-        log.info("Fetching players");
+        // log.info("Fetching players");
         return _playerRepo.findAll(PageRequest.of(start, limit)).toList();
     }
 
     @Override
     public List<Player> fullList(){
-        log.info("Fetching all players");
+        // log.info("Fetching all players");
         return _playerRepo.findAll(Sort.by(Sort.Direction.ASC, "id"));
     }
 
     @Override
     public List<Player> readString(String listP){
-        log.info(listP);
+        // log.info(listP);
         List<Player> answ = new ArrayList<>();
         int start = 0;
         int end = 0;
@@ -92,7 +92,7 @@ public class PlayerServiceImplementation implements PlayerService{
     //This might potentially save time since we do not have to make "find by username" type of deal.
     @Override
     public List<Player> fullListUser(String user){
-        log.info("Fetching all players from User List: {}", user);
+        // log.info("Fetching all players from User List: {}", user);
         String t = _userRepo.findByuserName(user).get(0).getListOfPlayers();
         if(t.length() == 0){
             return new ArrayList<>();
@@ -137,7 +137,7 @@ public class PlayerServiceImplementation implements PlayerService{
      */
     @Override
     public Teams balanceTeams(){
-        log.info("Starting Balancing Teams");
+        // log.info("Starting Balancing Teams");
 
         //p will hold all the players (Up to size 10) taken by listTest()
         int sizeLimit = postedPlayers.size()/2;
@@ -149,7 +149,7 @@ public class PlayerServiceImplementation implements PlayerService{
         double sumT1 = 0;
         double sumT2 = 0;
 
-        log.info("Starting Teams base");
+        // log.info("Starting Teams base");
 
         for(Player players : postedPlayers){
             t1.add(players);
@@ -213,7 +213,7 @@ public class PlayerServiceImplementation implements PlayerService{
 
         }
 
-        log.info("Returning Balanced Teams");
+        // log.info("Returning Balanced Teams");
         this._teams = implementedTeams;
         return implementedTeams;
     }
@@ -260,7 +260,7 @@ public class PlayerServiceImplementation implements PlayerService{
 
     @Override
     public List<Team> printOutTeams(int amount){
-        log.info("Starting to make Teams");
+        // log.info("Starting to make Teams");
         return this.balanceTeams().getTeams(amount);
     }
 

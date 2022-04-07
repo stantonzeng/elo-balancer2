@@ -22,23 +22,23 @@ public class UserServiceImplementation implements UserService{
 
     @Override
     public User create(User _user) {
-        log.info("Creating new User: {}", _user.getUserName());
+        // log.info("Creating new User: {}", _user.getUserName());
         return this._userRepo.save(_user);
     }
 
     @Override
     public User update(User _user) {
-        log.info("Updating new User: {}", _user.getUserName());
+        // log.info("Updating new User: {}", _user.getUserName());
         return this._userRepo.save(_user);
     }
 
     @Override
     public User get(String name) {
-        log.info("Finding User: {}", name);
+        // log.info("Finding User: {}", name);
         List<User> user = this._userRepo.findByuserName(name);
 
         if(user.size() == 0){
-            log.info("{} not found", name);
+            // log.info("{} not found", name);
             return null;
         }
 
@@ -47,7 +47,7 @@ public class UserServiceImplementation implements UserService{
 
     @Override
     public List<User> fullList(){
-        log.info("Fetching all users");
+        // log.info("Fetching all users");
         return _userRepo.findAll(Sort.by(Sort.Direction.ASC, "userName"));
     }
 

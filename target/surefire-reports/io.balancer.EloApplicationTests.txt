@@ -1,0 +1,7 @@
+-------------------------------------------------------------------------------
+Test set: io.balancer.EloApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.837 s <<< FAILURE! - in io.balancer.EloApplicationTests
+io.balancer.EloApplicationTests  Time elapsed: 0.832 s  <<< ERROR!
+java.lang.IllegalStateException: Unable to find a @SpringBootConfiguration, you need to use @ContextConfiguration or @SpringBootTest(classes=...) with your test
+

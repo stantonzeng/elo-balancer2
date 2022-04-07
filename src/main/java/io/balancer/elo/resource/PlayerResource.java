@@ -24,11 +24,17 @@ import static org.springframework.http.HttpStatus.OK;
 @RequestMapping("/api/player")
 @Slf4j
 public class PlayerResource {
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(PlayerResource.class);
     private final PlayerServiceImplementation playerServiceImplementation;
 
     public PlayerResource(PlayerServiceImplementation playerServiceImplementation) {
         this.playerServiceImplementation = playerServiceImplementation;
     }
+
+    @GetMapping("/")
+    public String hello() {
+        return "test test test";
+      }
 
     @GetMapping("/get/{id}")
     public ResponseEntity<Response> getPlayer(@PathVariable("id") Long id){

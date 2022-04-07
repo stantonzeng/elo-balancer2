@@ -16,8 +16,9 @@ import static org.springframework.http.HttpStatus.CREATED;
 @CrossOrigin
 @RestController
 @RequestMapping("/api/user")
-@Slf4j
+// @Slf4j
 public class UserResource {
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(UserResource.class);
     private final UserServiceImplementation userServiceImplementation;
 
     public UserResource(UserServiceImplementation userServiceImplementation) {

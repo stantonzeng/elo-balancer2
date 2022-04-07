@@ -9,10 +9,19 @@ import javax.persistence.*; //Comes from Java Persistence API (JPA), Maps Java o
 import javax.validation.constraints.NotEmpty;
 
 @Entity //Turns our class into an entity so we can map it to db
-@Data //Creates the getters and setters
 @NoArgsConstructor
-@AllArgsConstructor
+// @AllArgsConstructor
 public class Player {
+    public Player(){
+        
+    }
+
+    public Player(Long idVal, Double eloVal, String nameVal, double streakVal){
+        this.id = idVal;
+        this.elo = eloVal;
+        this.name = nameVal;
+        this.streak = streakVal;
+    }
 
     @Id //Identifies the primary key for the @Entity value
     @GeneratedValue(strategy = GenerationType.AUTO) //HOW we generate our Id's for players
@@ -23,6 +32,31 @@ public class Player {
     private String name;
 
     private double streak;
+
+    public Long getId() {
+        return this.id;
+    }
+    public void setId(Long val){
+        this.id = val;
+    }
+    public double getElo(){
+        return this.elo;
+    }
+    public void setElo(Double val){
+        this.elo = val;
+    }
+    public String getName(){
+        return this.name;
+    }
+    public void setName(String nam){
+        this.name = nam;
+    }
+    public double getStreak(){
+        return this.streak;
+    }
+    public void setStreak(double val){
+        this.streak = val;
+    }
 
     public void incrementStreak(){
         this.streak += 1.0;

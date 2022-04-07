@@ -10,7 +10,7 @@ import java.math.RoundingMode;
 
 import static java.lang.Math.abs;
 
-@Data
+// @Data
 @Slf4j
 public class Team{
     public Team(){
@@ -40,11 +40,71 @@ public class Team{
 
     private List<Player> team1;
     private List<Player> team2;
+    /**
+     * @return the team1
+     */
+    public List<Player> getTeam1() {
+        return team1;
+    }
+    /**
+     * @param team1 the team1 to set
+     */
+    public void setTeam1(List<Player> team1) {
+        this.team1 = team1;
+    }
+    /**
+     * @return the team2
+     */
+    public List<Player> getTeam2() {
+        return team2;
+    }
+    /**
+     * @param team2 the team2 to set
+     */
+    public void setTeam2(List<Player> team2) {
+        this.team2 = team2;
+    }
 
     private double sumEloT1;
     private double sumEloT2;
+    /**
+     * @return the sumEloT1
+     */
+    public double getSumEloT1() {
+        return sumEloT1;
+    }
+    /**
+     * @param sumEloT1 the sumEloT1 to set
+     */
+    public void setSumEloT1(double sumEloT1) {
+        this.sumEloT1 = sumEloT1;
+    }
+    /**
+     * @return the sumEloT2
+     */
+    public double getSumEloT2() {
+        return sumEloT2;
+    }
+    /**
+     * @param sumEloT2 the sumEloT2 to set
+     */
+    public void setSumEloT2(double sumEloT2) {
+        this.sumEloT2 = sumEloT2;
+    }
 
     private double eloDifference;
+    /**
+     * @return the eloDifference
+     */
+    public double getEloDifference() {
+        return eloDifference;
+    }
+    /**
+     * @param eloDifference the eloDifference to set
+     */
+    public void setEloDifference(double eloDifference) {
+        this.eloDifference = eloDifference;
+    }
 
     public String printAllPlayers(){
         StringBuilder t = new StringBuilder("[[");
@@ -90,16 +150,16 @@ public class Team{
         double elo2 = 0;
         for (Player value : team1) {
             value.incrementStreak();
-            log.info(String.valueOf(value.getStreakBonus()));
-            log.info(String.valueOf((1.0 - win - calculateExpectedValueT1())));
+            // log.info(String.valueOf(value.getStreakBonus()));
+            // log.info(String.valueOf((1.0 - win - calculateExpectedValueT1())));
 
             BigDecimal temp = BigDecimal.valueOf(kVal(value.getElo()) * ((1 - win - calculateExpectedValueT1()))).setScale(2, RoundingMode.HALF_UP);
             BigDecimal bd1 = BigDecimal.valueOf(value.getStreakBonus() * temp.doubleValue()).setScale(2, RoundingMode.HALF_UP);
             BigDecimal val1 = BigDecimal.valueOf(value.getElo() + bd1.doubleValue()).setScale(2, RoundingMode.HALF_UP);
 
 
-            log.info("Updating Team 1 Player " + value.getName() + "'s elo(" + value.getElo() + "): " +
-                    String.valueOf(value.getElo() + bd1.doubleValue()));
+            // log.info("Updating Team 1 Player " + value.getName() + "'s elo(" + value.getElo() + "): " +
+            //         String.valueOf(value.getElo() + bd1.doubleValue()));
             value.setElo(val1.doubleValue());
             elo1 += value.getElo();
             ans1.add(value);
@@ -107,15 +167,15 @@ public class Team{
 
         for (Player player : team2) {
             player.decrementStreak();
-            log.info(String.valueOf(player.getStreakBonus()));
-            log.info(String.valueOf((win - calculateExpectedValueT2())));
+            // log.info(String.valueOf(player.getStreakBonus()));
+            // log.info(String.valueOf((win - calculateExpectedValueT2())));
 
             BigDecimal temp = BigDecimal.valueOf(kVal(player.getElo()) * ((win - calculateExpectedValueT2()))).setScale(2, RoundingMode.HALF_UP);
             BigDecimal bd2 = BigDecimal.valueOf(player.getStreakBonus() * temp.doubleValue()).setScale(2, RoundingMode.HALF_UP);
             BigDecimal val2 = BigDecimal.valueOf(player.getElo() + bd2.doubleValue()).setScale(2, RoundingMode.HALF_UP);
 
-            log.info("Updating Team 2 Player " + player.getName() + "'s elo(" + player.getElo() + "): " +
-                    String.valueOf(val2.doubleValue()));
+            // log.info("Updating Team 2 Player " + player.getName() + "'s elo(" + player.getElo() + "): " +
+            //         String.valueOf(val2.doubleValue()));
             player.setElo(val2.doubleValue());
             elo2 += player.getElo();
             ans2.add(player);

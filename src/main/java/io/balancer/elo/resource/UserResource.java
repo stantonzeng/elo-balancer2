@@ -13,7 +13,7 @@ import java.util.Map;
 import static java.time.LocalDateTime.now;
 import static org.springframework.http.HttpStatus.CREATED;
 
-@CrossOrigin
+@CrossOrigin(origins = {"http://localhost:3000"})
 @RestController
 @RequestMapping("/api/user")
 // @Slf4j

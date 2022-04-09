@@ -19,7 +19,7 @@ var objectID = {};
 export function BasicTable(){
     // console.log(useLocation());
     const {state} = useLocation();
-    const fetcher = url => axios.get(url).then(res => res.data)
+    const fetcher = url => axios.get(url).then(res => res.header("Access-Control-Allow-Origin", "*")).then(res => res.data)
     const [sleeping, setSleeping] = useState(true)
 
     const { data, error } = useSWR(sleeping ? null : `https://8080-0610b5c5-a6b5-4694-9cd9-b58bba0c3d73.cs-us-west1-ijlt.cloudshell.dev/api/player/full_list/${state.name}=`, fetcher, {revalidateOnFocus: false});
@@ -81,7 +81,7 @@ export function BasicTableTemp(obj){
         objectID = {};
         rowIDArray.forEach(key => objectID[key-1] = true);
         // console.log(objectID);
-        axios.post('https://8080-0610b5c5-a6b5-4694-9cd9-b58bba0c3d73.cs-us-west1-ijlt.cloudshell.dev/api/player/selectedPlayers', selectedProfiles);
+        axios.post('https://8080-0610b5c5-a6b5-4694-9cd9-b58bba0c3d73.cs-us-west1-ijlt.cloudshell.dev/api/player/selectedPlayers', selectedProfiles).then(res => res.header("Access-Control-Allow-Origin", "*"));
         let newv = uName;
         navigate("/listTeams", {state : {name:newv}})
     }

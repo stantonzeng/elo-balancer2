@@ -19,7 +19,7 @@ import static org.springframework.http.HttpStatus.OK;
 
 //Controller
 
-@CrossOrigin
+@CrossOrigin(origins = {"http://localhost:3000"})
 @RestController
 @RequestMapping("/api/player")
 @Slf4j

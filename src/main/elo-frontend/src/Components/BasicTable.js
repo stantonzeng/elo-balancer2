@@ -22,7 +22,7 @@ export function BasicTable(){
     const fetcher = url => axios.get(url).then(res => res.data)
     const [sleeping, setSleeping] = useState(true)
 
-    const { data, error } = useSWR(sleeping ? null : `http://https://8080-0610b5c5-a6b5-4694-9cd9-b58bba0c3d73.cs-us-west1-ijlt.cloudshell.dev/api/player/full_list/${state.name}=`, fetcher, {revalidateOnFocus: false});
+    const { data, error } = useSWR(sleeping ? null : `https://8080-0610b5c5-a6b5-4694-9cd9-b58bba0c3d73.cs-us-west1-ijlt.cloudshell.dev/api/player/full_list/${state.name}=`, fetcher, {revalidateOnFocus: false});
     
     useEffect(() => {
         setTimeout(() => {
@@ -81,7 +81,7 @@ export function BasicTableTemp(obj){
         objectID = {};
         rowIDArray.forEach(key => objectID[key-1] = true);
         // console.log(objectID);
-        axios.post('http://https://8080-0610b5c5-a6b5-4694-9cd9-b58bba0c3d73.cs-us-west1-ijlt.cloudshell.dev/api/player/selectedPlayers', selectedProfiles);
+        axios.post('https://8080-0610b5c5-a6b5-4694-9cd9-b58bba0c3d73.cs-us-west1-ijlt.cloudshell.dev/api/player/selectedPlayers', selectedProfiles);
         let newv = uName;
         navigate("/listTeams", {state : {name:newv}})
     }

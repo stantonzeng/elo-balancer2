@@ -19,7 +19,7 @@ var objectID = {};
 export function BasicTable(){
     // console.log(useLocation());
     const {state} = useLocation();
-    const fetcher = url => axios.get(url).then(res => res.header("Access-Control-Allow-Origin", "*")).then(res => res.data)
+    const fetcher = url => axios.get(url).then(res => res.data)
     const [sleeping, setSleeping] = useState(true)
 
     const { data, error } = useSWR(sleeping ? null : `https://team-balancer-elo.wl.r.appspot.com/api/player/full_list/${state.name}=`, fetcher, {revalidateOnFocus: false});
@@ -29,6 +29,8 @@ export function BasicTable(){
             setSleeping(false)
         }, 500)
     }, [])
+
+    console.log(data);
 
     if (error) console.log("lol");
     if (!data) return <div className = "loading">loading...</div>
@@ -81,7 +83,7 @@ export function BasicTableTemp(obj){
         objectID = {};
         rowIDArray.forEach(key => objectID[key-1] = true);
         // console.log(objectID);
-        axios.post('https://team-balancer-elo.wl.r.appspot.com/api/player/selectedPlayers', selectedProfiles).then(res => res.header("Access-Control-Allow-Origin", "*"));
+        axios.post('https://team-balancer-elo.wl.r.appspot.com/api/player/selectedPlayers', selectedProfiles);
         let newv = uName;
         navigate("/listTeams", {state : {name:newv}})
     }

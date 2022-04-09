@@ -17,8 +17,8 @@ export const PostResults = (index) => {
   let navigate = useNavigate();
 
   const handleSubmit = (e) =>{
-    console.log(`http://localhost:8080/api/player/win/${index.index}`);
-    axios.post(`http://localhost:8080/api/player/win/${index.index}`, teamNumb);
+    console.log(`http://https://8080-0610b5c5-a6b5-4694-9cd9-b58bba0c3d73.cs-us-west1-ijlt.cloudshell.dev/api/player/win/${index.index}`);
+    axios.post(`http://https://8080-0610b5c5-a6b5-4694-9cd9-b58bba0c3d73.cs-us-west1-ijlt.cloudshell.dev/api/player/win/${index.index}`, teamNumb);
     let newv = state.name;
     navigate("/players", {state : {name:newv}});
   }

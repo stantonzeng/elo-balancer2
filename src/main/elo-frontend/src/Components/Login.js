@@ -26,10 +26,10 @@ export function Login(){
     useEffect(() => {
         if(create && !doesDataExist) {
             setCreate(false);
-            // console.log('http://localhost:8080/api/user/addString');
+            // console.log('http://https://8080-0610b5c5-a6b5-4694-9cd9-b58bba0c3d73.cs-us-west1-ijlt.cloudshell.dev/api/user/addString');
             console.log(dataname);
             var newv = dataname.replace(/ /g, '_');
-            axios.post('http://localhost:8080/api/user/addString', newv)
+            axios.post('http://https://8080-0610b5c5-a6b5-4694-9cd9-b58bba0c3d73.cs-us-west1-ijlt.cloudshell.dev/api/user/addString', newv)
             FindDatatable(newv);
         }
         else if(create && doesDataExist){
@@ -46,16 +46,16 @@ export function Login(){
 
     const CheckName = async () => {
         var newv = dataname.replace(/ /g, '_');
-        await axios.get(`http://localhost:8080/api/user/check/${newv}=`).then(res => {console.log(res)
+        await axios.get(`http://https://8080-0610b5c5-a6b5-4694-9cd9-b58bba0c3d73.cs-us-west1-ijlt.cloudshell.dev/api/user/check/${newv}=`).then(res => {console.log(res)
         setDoesDataExist(res.data)
         setLazyWayOut(lazyWayOut+1)});
     }
 
-    //axios.get(`http://localhost:8080/api/user/get/${dataname}`).then(res => {console.log(res)});
-    //axios.get(`http://localhost:8080/api/user/check/${dataname}`).then(res => {console.log(res)}) 
+    //axios.get(`http://https://8080-0610b5c5-a6b5-4694-9cd9-b58bba0c3d73.cs-us-west1-ijlt.cloudshell.dev/api/user/get/${dataname}`).then(res => {console.log(res)});
+    //axios.get(`http://https://8080-0610b5c5-a6b5-4694-9cd9-b58bba0c3d73.cs-us-west1-ijlt.cloudshell.dev/api/user/check/${dataname}`).then(res => {console.log(res)}) 
     const FindDatatable = (newv) =>{
         console.log("finding")
-        axios.get(`http://localhost:8080/api/user/get/${newv}=`).then(res => {
+        axios.get(`http://https://8080-0610b5c5-a6b5-4694-9cd9-b58bba0c3d73.cs-us-west1-ijlt.cloudshell.dev/api/user/get/${newv}=`).then(res => {
             console.log(res)});
             //setUser(res)
         

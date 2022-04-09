@@ -8,7 +8,7 @@ const GetPlayerProfiles = () => {
     //pProfiles, and useState is an array that holds all of the pProfiles.
 
     const fetchPlayerProfiles = () =>{
-      axios.get('http://localhost:8080/api/player/full_list').then(res => {
+      axios.get('http://https://8080-0610b5c5-a6b5-4694-9cd9-b58bba0c3d73.cs-us-west1-ijlt.cloudshell.dev/api/player/full_list').then(res => {
         setPlayerProfiles(res.data);
       });
     }

@@ -22,32 +22,40 @@ public class EloApplication{
     class HelloWorldController {
         @GetMapping("/")
         public String hello() {
-            return "hello world!";
+            return "hello world (Version 2)!";
         }
     }
 
-	@Bean
-	CommandLineRunner run(PlayerRepository playerRepo, UserRepository userRepo){
-		return args -> {
+    // @RestController
+    // class WarmMeUp{
+    //     @GetMapping("/_ah/warmup")
+    //     public void warmUp() {
+    //         playerServiceImplementation.fullList();
+    //     }
+    // }
 
-			playerRepo.save(new Player(null, 1558.0, "bterabtragdsa", 0));
-			playerRepo.save(new Player(null, 1160.0, "My Cat Says Meow", 0));
-			playerRepo.save(new Player(null, 1893.0, "bubblysoju", 0));
-			playerRepo.save(new Player(null, 1524.0, "pagchompu", 0));
-			playerRepo.save(new Player(null, 1001.0, "Shamusa", 0));
-			playerRepo.save(new Player(null, 1636.0, "asdgartbaretb", 0));
-			playerRepo.save(new Player(null, 1222.0, "ShadowStriker", 0));
-			playerRepo.save(new Player(null, 1279.0, "Mitsuki Moon",	 0));
-			playerRepo.save(new Player(null, 1554.0, "Ally of Women", 0));
-			playerRepo.save(new Player(null, 1618.0, "Lionblaze219", 0));
+	// @Bean
+	// CommandLineRunner run(PlayerRepository playerRepo, UserRepository userRepo){
+	// 	return args -> {
 
-			userRepo.save(new User(null, "test123=", ""));
-			User u = userRepo.findByuserName("test123=").get(0);
-			u.addToList(String.valueOf(4));
-			u.addToList(String.valueOf(7));
-			u.addToList(String.valueOf(9));
-			userRepo.save(u);
+	// 		playerRepo.save(new Player(null, 1558.0, "bterabtragdsa", 0));
+	// 		playerRepo.save(new Player(null, 1160.0, "My Cat Says Meow", 0));
+	// 		playerRepo.save(new Player(null, 1893.0, "bubblysoju", 0));
+	// 		playerRepo.save(new Player(null, 1524.0, "pagchompu", 0));
+	// 		playerRepo.save(new Player(null, 1001.0, "Shamusa", 0));
+	// 		playerRepo.save(new Player(null, 1636.0, "asdgartbaretb", 0));
+	// 		playerRepo.save(new Player(null, 1222.0, "ShadowStriker", 0));
+	// 		playerRepo.save(new Player(null, 1279.0, "Mitsuki Moon",	 0));
+	// 		playerRepo.save(new Player(null, 1554.0, "Ally of Women", 0));
+	// 		playerRepo.save(new Player(null, 1618.0, "Lionblaze219", 0));
 
-		};
-	}
+	// 		userRepo.save(new User(null, "test123=", ""));
+	// 		User u = userRepo.findByuserName("test123=").get(0);
+	// 		u.addToList(String.valueOf(4));
+	// 		u.addToList(String.valueOf(7));
+	// 		u.addToList(String.valueOf(9));
+	// 		userRepo.save(u);
+
+	// 	};
+	// }
 }

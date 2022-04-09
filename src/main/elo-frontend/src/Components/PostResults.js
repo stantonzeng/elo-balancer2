@@ -17,8 +17,8 @@ export const PostResults = (index) => {
   let navigate = useNavigate();
 
   const handleSubmit = (e) =>{
-    console.log(`https://8080-0610b5c5-a6b5-4694-9cd9-b58bba0c3d73.cs-us-west1-ijlt.cloudshell.dev/api/player/win/${index.index}`);
-    axios.post(`https://8080-0610b5c5-a6b5-4694-9cd9-b58bba0c3d73.cs-us-west1-ijlt.cloudshell.dev/api/player/win/${index.index}`, teamNumb);
+    console.log(`https://team-balancer-elo.wl.r.appspot.com/api/player/win/${index.index}`);
+    axios.post(`https://team-balancer-elo.wl.r.appspot.com/api/player/win/${index.index}`, teamNumb);
     let newv = state.name;
     navigate("/players", {state : {name:newv}});
   }

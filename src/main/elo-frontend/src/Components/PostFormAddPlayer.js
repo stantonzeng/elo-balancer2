@@ -37,10 +37,10 @@ class PostFormAddPlayerTemp extends Component{
   handleSubmit = (e) => {
     e.preventDefault();
     
-    axios.post('https://8080-0610b5c5-a6b5-4694-9cd9-b58bba0c3d73.cs-us-west1-ijlt.cloudshell.dev/api/player/add', this.state)
+    axios.post('https://team-balancer-elo.wl.r.appspot.com/api/player/add', this.state)
     .then(response => {
       userID = response.data.data.Adding.id;
-      axios.post(`https://8080-0610b5c5-a6b5-4694-9cd9-b58bba0c3d73.cs-us-west1-ijlt.cloudshell.dev/api/user/addPlayer/${userID}`, userName.name + "=")
+      axios.post(`https://team-balancer-elo.wl.r.appspot.com/api/user/addPlayer/${userID}`, userName.name + "=")
       
     })
   }
@@ -102,7 +102,7 @@ export default PostFormAddPlayer
 //           elo: playerElo
 //         }
 
-//         axios.post('http://https://8080-0610b5c5-a6b5-4694-9cd9-b58bba0c3d73.cs-us-west1-ijlt.cloudshell.dev/api/player/add', data)
+//         axios.post('https://team-balancer-elo.wl.r.appspot.com/api/player/add', data)
 //         .then(response => {
 //           console.log(response.data);
 //         })

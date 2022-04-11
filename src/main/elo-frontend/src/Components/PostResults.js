@@ -17,7 +17,7 @@ export const PostResults = (index) => {
   let navigate = useNavigate();
 
   const handleSubmit = (e) =>{
-    console.log(`https://team-balancer-elo.wl.r.appspot.com/api/player/win/${index.index}`);
+    // console.log(`https://team-balancer-elo.wl.r.appspot.com/api/player/win/${index.index}`);
     axios.post(`https://team-balancer-elo.wl.r.appspot.com/api/player/win/${index.index}`, teamNumb);
     let newv = state.name;
     navigate("/players", {state : {name:newv}});

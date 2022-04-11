@@ -12,7 +12,6 @@ import java.util.Map;
 
 @Data
 @SuperBuilder
-@Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)//if something is null, just dont return it
 public class Response {
 

@@ -36,29 +36,32 @@ public class PlayerResource {
         return "test test test";
       }
 
+    //public ResponseEntity<Response> getPlayer(@PathVariable("id") Long id){
     @GetMapping("/get/{id}")
-    public ResponseEntity<Response> getPlayer(@PathVariable("id") Long id){
+    public Player getPlayer(@PathVariable("id") Long id){
         log.info("Get Api call: get/{id}");
-        return ResponseEntity.ok(Response.builder()
-                .timeStamp(now())
-                .data(Map.of("player", playerServiceImplementation.get(id)))
-                .message("Player retrieved")
-                .status(OK)
-                .statusCode(OK.value())
-                .build());
+
+        return playerServiceImplementation.get(id);
+        // return ResponseEntity.ok(Response.builder()
+        //         .timeStamp(now())
+        //         .data(Map.of("player", playerServiceImplementation.get(id)))
+        //         .message("Player retrieved")
+        //         .status(OK)
+        //         .statusCode(OK.value())
+        //         .build());
     }
 
-    @GetMapping("/response_list")
-    public ResponseEntity<Response> getList(){
-        log.info("Get Api call: response_list");
-        return ResponseEntity.ok(Response.builder()
-                .timeStamp(now())
-                .data(Map.of("players", playerServiceImplementation.list(0, 10)))
-                .message("Players retrieved")
-                .status(OK)
-                .statusCode(OK.value())
-                .build());
-    }
+    // @GetMapping("/response_list")
+    // public ResponseEntity<Response> getList(){
+    //     log.info("Get Api call: response_list");
+    //     return ResponseEntity.ok(Response.builder()
+    //             .timeStamp(now())
+    //             .data(Map.of("players", playerServiceImplementation.list(0, 10)))
+    //             .message("Players retrieved")
+    //             .status(OK)
+    //             .statusCode(OK.value())
+    //             .build());
+    // }
 
     @GetMapping("/list/{start}/{end}")
     public List<Player> getListLimit(@PathVariable("start") int start, @PathVariable("end") int end){
@@ -91,40 +94,49 @@ public class PlayerResource {
         return playerServiceImplementation.printOutTeams(amount);
     }
 
+    //public ResponseEntity<Response> updateWin(@RequestBody @Valid GameResult gameResult, @PathVariable String index) throws Exception {
     @PostMapping("/win/{index}")
-    public ResponseEntity<Response> updateWin(@RequestBody @Valid GameResult gameResult, @PathVariable String index) throws Exception {
+    public String updateWin(@RequestBody @Valid GameResult gameResult, @PathVariable String index) throws Exception {
         log.info("Post Api call: win");
         log.info(index);
-        return ResponseEntity.ok(Response.builder()
-                .timeStamp(now())
-                .data(Map.of("Results of game: ", playerServiceImplementation.gameResults(Integer.parseInt(index), gameResult.getTeamNumb()))) //Remember to change index of 0 to gameResult.getIndex()
-                .message("Team's elos adjusted")
-                .status(CREATED)
-                .statusCode(CREATED.value())
-                .build());
+
+        return (("Results of game: " + playerServiceImplementation.gameResults(Integer.parseInt(index), gameResult.getTeamNumb())));
+        // return ResponseEntity.ok(Response.builder()
+        //         .timeStamp(now())
+        //         .data(Map.of("Results of game: ", playerServiceImplementation.gameResults(Integer.parseInt(index), gameResult.getTeamNumb()))) //Remember to change index of 0 to gameResult.getIndex()
+        //         .message("Team's elos adjusted")
+        //         .status(CREATED)
+        //         .statusCode(CREATED.value())
+        //         .build());
 }
 
+    //public ResponseEntity<Response> addPlayer(@RequestBody @Valid Player player){
     @PostMapping("/add") //Post request, adds new players into the system
-    public ResponseEntity<Response> addPlayer(@RequestBody @Valid Player player){
+    public String addPlayer(@RequestBody @Valid Player player){
         log.info("Post Api call: add Player");
-        return ResponseEntity.ok(Response.builder()
-                .timeStamp(now())
-                .data(Map.of("Adding", playerServiceImplementation.create(player)))
-                .message("Player added")
-                .status(CREATED)
-                .statusCode(CREATED.value())
-                .build());
+
+        return playerServiceImplementation.create(player).getName();
+        // return ResponseEntity.ok(Response.builder()
+        //         .timeStamp(now())
+        //         .data(Map.of("Adding", playerServiceImplementation.create(player)))
+        //         .message("Player added")
+        //         .status(CREATED)
+        //         .statusCode(CREATED.value())
+        //         .build());
     }
 
+    //public ResponseEntity<Response> selectingPlayers(@RequestBody @Valid List<Player> gamers){
     @PostMapping("/selectedPlayers")
-    public ResponseEntity<Response> selectingPlayers(@RequestBody @Valid List<Player> gamers){
+    public String selectingPlayers(@RequestBody @Valid List<Player> gamers){
         log.info("Post Api call: selectedPlayers");
-        return ResponseEntity.ok(Response.builder()
-                .timeStamp(now())
-                .data(Map.of("Adding", playerServiceImplementation.setPostedPlayers(gamers)))
-                .message("Gamers Added")
-                .status(CREATED)
-                .statusCode(CREATED.value())
-                .build());
+
+        return ("Adding " + playerServiceImplementation.setPostedPlayers(gamers));
+        // return ResponseEntity.ok(Response.builder()
+        //         .timeStamp(now())
+        //         .data(Map.of("Adding", playerServiceImplementation.setPostedPlayers(gamers)))
+        //         .message("Gamers Added")
+        //         .status(CREATED)
+        //         .statusCode(CREATED.value())
+        //         .build());
     }
 }

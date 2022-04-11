@@ -54,9 +54,9 @@ export function Login(){
     //axios.get(`https://team-balancer-elo.wl.r.appspot.com/api/user/get/${dataname}`).then(res => {console.log(res)});
     //axios.get(`https://team-balancer-elo.wl.r.appspot.com/api/user/check/${dataname}`).then(res => {console.log(res)}) 
     const FindDatatable = (newv) =>{
-        console.log("finding")
-        axios.get(`https://team-balancer-elo.wl.r.appspot.com/api/user/get/${newv}=`).then(res => {
-            console.log(res)});
+        console.log("Getting datatable")
+        // axios.get(`https://team-balancer-elo.wl.r.appspot.com/api/user/get/${newv}=`).then(res => {
+        //     console.log(res)});
             //setUser(res)
         
         navigate("/players", {state : {name:newv}});

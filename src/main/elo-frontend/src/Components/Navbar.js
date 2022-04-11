@@ -1,6 +1,5 @@
 import {BrowserRouter,Routes,Route} from "react-router-dom";
 import React, {useEffect} from "react";
-import React from 'react'
 import Header from './Header';
 import { BasicTable } from './BasicTable';
 import { ListTeamsBoth } from "./ListTeams";

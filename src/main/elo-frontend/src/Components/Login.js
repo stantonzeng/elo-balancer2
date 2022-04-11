@@ -22,6 +22,10 @@ export function Login(){
     const [lazyWayOut, setLazyWayOut] = useState(0);
 
     let navigate = useNavigate();
+
+    useEffect(() => {
+        axios.get('https://team-balancer-elo.wl.r.appspot.com/').then(res => console.log(res));
+      }, []);
     
     useEffect(() => {
         if(create && !doesDataExist) {

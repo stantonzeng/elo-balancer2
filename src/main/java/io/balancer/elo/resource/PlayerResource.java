@@ -115,7 +115,7 @@ public class PlayerResource {
     public String addPlayer(@RequestBody @Valid Player player){
         log.info("Post Api call: add Player");
 
-        return playerServiceImplementation.create(player).getName();
+        return String.valueOf(playerServiceImplementation.create(player).getId());
         // return ResponseEntity.ok(Response.builder()
         //         .timeStamp(now())
         //         .data(Map.of("Adding", playerServiceImplementation.create(player)))

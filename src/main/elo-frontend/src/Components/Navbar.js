@@ -1,16 +1,24 @@
 import {BrowserRouter,Routes,Route} from "react-router-dom";
+import React, {useEffect} from "react";
 import React from 'react'
 import Header from './Header';
 import { BasicTable } from './BasicTable';
 import { ListTeamsBoth } from "./ListTeams";
+import axios from "axios";
 import '../App.css';
 import './Text.css';
 import example_test from '../balancer_gifs/example_test_2.gif'
 import example_balance from '../balancer_gifs/balance_teams.gif'
 import { Login } from "./Login";
 
-const Home = () => (
-    <><Header />
+const Home = () => {
+
+    useEffect(() => {
+        axios.get('https://team-balancer-elo.wl.r.appspot.com/').then(res => console.log(res));
+      }, []);
+    
+
+    return (<><Header />
     <div className = "Home_About">
         <p className = "norm"> This is a n x n team balancer. You can create your own datatable of players and it will output the 
             5 best different teams from the players you selected.</p>
@@ -24,8 +32,8 @@ const Home = () => (
         <img src = {example_balance} alt = "Example 2"/>
         <p className = "norm"> Once the teams are balanced, you can play your game with whatever team you select. You can input which team
         wins, and the balancer will adjust the elos accordingly</p>
-    </div></>
-);
+    </div></>);
+}
   
 const About = () => (
     <><Header />

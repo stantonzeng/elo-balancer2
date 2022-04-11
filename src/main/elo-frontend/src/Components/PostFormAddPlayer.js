@@ -40,8 +40,9 @@ class PostFormAddPlayerTemp extends Component{
     axios.post('https://team-balancer-elo.wl.r.appspot.com/api/player/add', this.state)
     .then(response => {
       userID = response.data.data.Adding.id;
+      console.log(userID);
       axios.post(`https://team-balancer-elo.wl.r.appspot.com/api/user/addPlayer/${userID}`, userName.name + "=")
-      
+      console.log("Posted")
     })
   }
 
